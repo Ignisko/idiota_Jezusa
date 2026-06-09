@@ -32,6 +32,11 @@ document.addEventListener('DOMContentLoaded', () => {
   placeList.appendChild(homeLi);
 
   wydData.forEach((data, index) => {
+    // Offset Rome slightly so it doesn't overlap Vatican City
+    if (data.id === "1985" || data.id === "2000") {
+      data.coordinates = [41.8902, 12.4922];
+    }
+    
     latlngs.push(data.coordinates);
 
     // Strip country to save space, and explicitly shorten long names
