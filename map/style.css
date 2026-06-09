@@ -63,12 +63,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .marker-dot {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   background-color: var(--accent-gold);
-  border: none;
+  border: 3px solid #fff;
   border-radius: 50% !important;
-  box-shadow: 0 0 15px rgba(230, 43, 58, 0.6) !important;
+  box-shadow: 0 0 15px var(--accent-yellow) !important;
   will-change: transform;
   backface-visibility: hidden;
   transform: translateZ(0);
