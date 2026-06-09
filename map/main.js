@@ -7,17 +7,17 @@ document.addEventListener('DOMContentLoaded', () => {
   const map = L.map('map', {
     zoomControl: false,
     scrollWheelZoom: false,
+    doubleClickZoom: false,
     dragging: false,
-    doubleClickZoom: false
+    touchZoom: false,
+    keyboard: false
   }).setView([41.9029, 12.4534], 4);
 
   L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
     subdomains: 'abcd',
     maxZoom: 20,
-    keepBuffer: 12,
-    updateWhenZooming: false,
-    updateWhenIdle: true
+    keepBuffer: 30
   }).addTo(map);
 
 
