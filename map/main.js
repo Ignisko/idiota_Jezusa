@@ -66,11 +66,12 @@ document.addEventListener('DOMContentLoaded', () => {
       article.id = `card-${data.id}`;
       article.setAttribute('data-index', index);
       
-      const titleHTML = data.year === "2027" ? `<h2 class="seoul-title">WYD SEOUL 2027</h2>` : `<h2>${data.location}</h2>`;
+      const titleHTML = data.year === "2027" ? `<h2 class="seoul-title">Seoul, South Korea</h2>` : `<h2>${data.location}</h2>`;
 
       let attendanceText = data.attendance;
+      let attendanceHTML = "";
       if (attendanceText !== "Upcoming") {
-        attendanceText += " pilgrims";
+        attendanceHTML = `<p>${attendanceText} pilgrims</p>`;
       }
 
       article.innerHTML = `
@@ -78,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="card-details">
           <p>${data.date}</p>
           <p>${data.theme}</p>
-          <p>${attendanceText}</p>
+          ${attendanceHTML}
         </div>
         <p class="card-description">${data.description}</p>
       `;
@@ -144,9 +145,12 @@ document.addEventListener('DOMContentLoaded', () => {
           if (currentActiveId !== data.id) {
             currentActiveId = data.id;
 
-            document.querySelectorAll('.custom-map-marker').forEach(el => el.classList.remove('active-pin'));
-            const activeMarker = document.querySelector(`.marker-${data.id}`);
-            if (activeMarker) activeMarker.classList.add('active-pin');
+            document.querySelectorAll('.custom-map-marker').forEach(el => {
+              el.classList.remove('active-pin');
+              if (el.classList.contains(`marker-${data.id}`)) {
+                el.classList.add('active-pin');
+              }
+            });
 
             navLinks.forEach(link => {
               if (link.getAttribute('data-id') === data.id) {
@@ -293,17 +297,18 @@ document.addEventListener('DOMContentLoaded', () => {
       if (index > 0) {
         const article = document.getElementById(`card-${data.id}`);
         if(article) {
-          const titleHTML = data.year === "2027" ? `<h2 class="seoul-title">WYD SEOUL 2027</h2>` : `<h2>${data.location}</h2>`;
+          const titleHTML = data.year === "2027" ? `<h2 class="seoul-title">Seoul, South Korea</h2>` : `<h2>${data.location}</h2>`;
           let attendanceText = data.attendance;
+          let attendanceHTML = "";
           if (attendanceText !== t.upcomingLabel && attendanceText !== "Upcoming") {
-             attendanceText += t.pilgrimsLabel;
+             attendanceHTML = `<p>${attendanceText}${t.pilgrimsLabel}</p>`;
           }
           article.innerHTML = `
             ${titleHTML}
             <div class="card-details">
               <p>${data.date}</p>
               <p>${data.theme}</p>
-              <p>${attendanceText}</p>
+              ${attendanceHTML}
             </div>
             <p class="card-description">${data.description}</p>
           `;

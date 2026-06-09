@@ -82,19 +82,20 @@ h1, h2, h3, h4, h5, h6 {
   z-index: 1000;
 }
 
-.city-label {
-  background: transparent;
-  border: none;
-  box-shadow: none;
-  color: #1a1a1a;
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 0.95rem;
-  font-weight: 700;
-  text-shadow: -2px -2px 0 #fff, 2px -2px 0 #fff, -2px 2px 0 #fff, 2px 2px 0 #fff, 0 0 10px rgba(255,255,255,0.9);
-  opacity: 0.9;
+.leaflet-tooltip {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: #1a1a1a !important;
+  font-family: var(--font-heading) !important;
+  font-size: 1.15rem !important;
+  font-weight: 700 !important;
+  text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff, 0 0 10px rgba(255,255,255,0.9) !important;
+  opacity: 0.9 !important;
 }
 
-.city-label::before {
+.leaflet-tooltip::before,
+.leaflet-tooltip::after {
   display: none !important;
 }
 
