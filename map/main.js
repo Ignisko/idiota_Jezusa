@@ -14,7 +14,8 @@ document.addEventListener('DOMContentLoaded', () => {
   L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
     attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
     subdomains: 'abcd',
-    maxZoom: 20
+    maxZoom: 20,
+    keepBuffer: 12
   }).addTo(map);
 
   const markerIcon = L.divIcon({
@@ -147,7 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
               currentTargetCoords = data.coordinates;
               map.flyTo(data.coordinates, 8, {
                 animate: true,
-                duration: 7.0
+                duration: 5.0
               });
             }
           }
@@ -161,7 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
              // Fly to Warsaw
              map.flyTo([52.2297, 21.0122], 8, {
                animate: true,
-               duration: 7.0
+               duration: 5.0
              });
            }
         } else if (entry.target.id === 'card-symbols') {
@@ -214,7 +215,7 @@ document.addEventListener('DOMContentLoaded', () => {
            // Fly back to original view
            map.flyTo([41.9029, 12.4534], 4, {
              animate: true,
-             duration: 7.0
+             duration: 5.0
            });
         }
       });

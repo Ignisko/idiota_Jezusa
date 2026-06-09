@@ -70,6 +70,9 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 50% !important;
   box-shadow: 0 4px 10px rgba(0,0,0,0.3) !important;
   transition: transform 0.3s ease;
+  will-change: transform;
+  backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 /* Right Side Navigation List */
