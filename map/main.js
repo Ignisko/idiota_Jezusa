@@ -32,9 +32,9 @@ document.addEventListener('DOMContentLoaded', () => {
   placeList.appendChild(homeLi);
 
   wydData.forEach((data, index) => {
-    // Offset Rome slightly so it doesn't overlap Vatican City
+    // Offset Rome significantly more so it doesn't overlap Vatican City at zoom level 4
     if (data.id === "1985" || data.id === "2000") {
-      data.coordinates = [41.8902, 12.4922];
+      data.coordinates = [41.3, 13.0]; 
     }
     
     latlngs.push(data.coordinates);
@@ -44,21 +44,20 @@ document.addEventListener('DOMContentLoaded', () => {
     if (navLabel === "Santiago de Compostela") navLabel = "Santiago";
     if (navLabel === "Vatican City") navLabel = "Vatican";
 
+    let labelClass = "city-label";
+    if (navLabel === "Vatican") labelClass += " label-left";
+
     const specificIcon = L.divIcon({
       className: `custom-map-marker marker-${data.id}`,
-      html: '<div class="marker-dot"></div>',
+      html: `
+        <div class="marker-dot"></div>
+        <div class="${labelClass}">${navLabel}</div>
+      `,
       iconSize: [24, 24],
       iconAnchor: [12, 12]
     });
 
     const marker = L.marker(data.coordinates, { icon: specificIcon }).addTo(map);
-    
-    marker.bindTooltip(navLabel, {
-      permanent: true,
-      direction: 'right',
-      className: 'city-label',
-      offset: [10, 0]
-    });
 
     const li = document.createElement('li');
     li.innerHTML = `<a href="#card-${data.id}" data-id="${data.id}">${navLabel}</a>`;
@@ -326,6 +325,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (navLabel === "Santiago de Compostela") navLabel = "Santiago";
         if (navLabel === "Vatican City" || navLabel === "Watykan" || navLabel === "바티칸 시국" || navLabel === "Ciudad del Vaticano" || navLabel === "Città del Vaticano" || navLabel === "Cidade do Vaticano") navLabel = "Vatican";
         navLink.innerHTML = navLabel;
+        
+        const cityLabel = document.querySelector(`.marker-${data.id} .city-label`);
+        if (cityLabel) {
+          cityLabel.innerHTML = navLabel;
+        }
       }
     });
 
