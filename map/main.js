@@ -326,9 +326,10 @@ document.addEventListener('DOMContentLoaded', () => {
         if (navLabel === "Vatican City" || navLabel === "Watykan" || navLabel === "바티칸 시국" || navLabel === "Ciudad del Vaticano" || navLabel === "Città del Vaticano" || navLabel === "Cidade do Vaticano") navLabel = "Vatican";
         navLink.innerHTML = navLabel;
         
-        const cityLabel = document.querySelector(`.marker-${data.id} .city-label`);
-        if (cityLabel) {
-          cityLabel.innerHTML = navLabel;
+        const markerEl = document.querySelector(`[class~="marker-${data.id}"]`);
+        if (markerEl) {
+          const cityLabel = markerEl.querySelector('.city-label');
+          if (cityLabel) cityLabel.innerHTML = navLabel;
         }
       }
     });

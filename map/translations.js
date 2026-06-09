@@ -212,7 +212,7 @@ window.wydDataByLang = {
     { id: "2016", year: "2016", location: "Kraków, Poland", date: "26–31 July 2016", coordinates: [50.0200, 20.0400], theme: "Blessed are the merciful, for they will receive mercy", attendance: "3,000,000", description: "Held on the Occasion of the Extraordinary Jubilee of Mercy." },
     { id: "2019", year: "2019", location: "Panama City, Panama", date: "22–27 January 2019", coordinates: [9.0300, -79.4400], theme: "I am the servant of the Lord.", attendance: "700,000", description: "First WYD to take place in Central America." },
     { id: "2023", year: "2023", location: "Lisbon, Portugal", date: "1–6 August 2023", coordinates: [38.7800, -9.0900], theme: "Mary arose and went with haste.", attendance: "1,500,000", description: "Last WYD attended by Pope Francis. First WYD after COVID-19 pandemic." },
-    { id: "2027", year: "2027", location: "Seoul, South Korea", date: "3–8 August 2027", coordinates: [37.5665, 126.9780], theme: "Take courage! I have overcome the world.", attendance: "Upcoming", description: "First WYD held in East Asia and a Christian-minority country." }
+    { id: "2027", year: "2027", location: "Seoul, South Korea", date: "3–8 August 2027", coordinates: [37.5665, 126.9780], theme: "Take courage! I have overcome the world.", attendance: "Upcoming", description: "First WYD held in East Asia and a Christian-minority country. First hosted by Pope Leo XIV." }
   ],
   pl: [
     { id: "1984", year: "1984", location: "Watykan", date: "14–15 Kwietnia 1984", coordinates: [41.9029, 12.4534], theme: "Rok Święty Odkupienia: Święto Nadziei", attendance: "300,000", description: "Papież Jan Paweł II powierza Młodzieży Krzyż ŚDM. Pierwsze ŚDM w Europie Południowej." },
@@ -232,7 +232,7 @@ window.wydDataByLang = {
     { id: "2016", year: "2016", location: "Kraków, Polska", date: "26–31 Lipca 2016", coordinates: [50.0200, 20.0400], theme: "Błogosławieni miłosierni, albowiem oni miłosierdzia dostąpią", attendance: "3,000,000", description: "Odbyło się z okazji Nadzwyczajnego Jubileuszu Miłosierdzia." },
     { id: "2019", year: "2019", location: "Panama, Panama", date: "22–27 Stycznia 2019", coordinates: [9.0300, -79.4400], theme: "Oto ja służebnica Pańska", attendance: "700,000", description: "Pierwsze ŚDM, które odbyły się w Ameryce Środkowej." },
     { id: "2023", year: "2023", location: "Lizbona, Portugalia", date: "1–6 Sierpnia 2023", coordinates: [38.7800, -9.0900], theme: "Maryja wstała i poszła z pośpiechem", attendance: "1,500,000", description: "Pierwsze ŚDM po pandemii COVID-19." },
-    { id: "2027", year: "2027", location: "Seul, Korea Południowa", date: "3–8 Sierpnia 2027", coordinates: [37.5665, 126.9780], theme: "Odwagi! Ja obudziłem świat.", attendance: "Upcoming", description: "Pierwsze ŚDM w Azji Wschodniej i kraju, gdzie chrześcijanie stanowią mniejszość." }
+    { id: "2027", year: "2027", location: "Seul, Korea Południowa", date: "3–8 Sierpnia 2027", coordinates: [37.5665, 126.9780], theme: "Odwagi! Ja obudziłem świat.", attendance: "Upcoming", description: "Pierwsze ŚDM w Azji Wschodniej i kraju, gdzie chrześcijanie stanowią mniejszość. Pierwsze organizowane przez papieża Leona XIV." }
   ],
   ko: [
     { id: "1984", year: "1984", location: "바티칸 시국", date: "1984년 4월 14-15일", coordinates: [41.9029, 12.4534], theme: "구속의 성년: 희망의 축제", attendance: "300,000", description: "교황 요한 바오로 2세가 청년들에게 WYD 십자가를 맡깁니다. 남부 유럽에서의 첫 번째 대회." },
@@ -252,7 +252,7 @@ window.wydDataByLang = {
     { id: "2016", year: "2016", location: "폴란드 크라쿠프", date: "2016년 7월 26-31일", coordinates: [50.0200, 20.0400], theme: "자비로운 사람들은 행복하다...", attendance: "3,000,000", description: "자비의 희년을 맞이하여 개최." },
     { id: "2019", year: "2019", location: "파나마 파나마시티", date: "2019년 1월 22-27일", coordinates: [9.0300, -79.4400], theme: "저는 주님의 종입니다.", attendance: "700,000", description: "중미에서 처음 열린 대회." },
     { id: "2023", year: "2023", location: "포르투갈 리스본", date: "2023년 8월 1-6일", coordinates: [38.7800, -9.0900], theme: "마리아는 일어나 서둘러 길을 떠났다.", attendance: "1,500,000", description: "코로나19 대유행 이후 첫 대회." },
-    { id: "2027", year: "2027", location: "한국 서울", date: "2027년 8월 3-8일", coordinates: [37.5665, 126.9780], theme: "용기를 내어라! 내가 세상을 이겼다.", attendance: "Upcoming", description: "동아시아 및 그리스도교 소수 국가에서 처음으로 열리는 대회." }
+    { id: "2027", year: "2027", location: "한국 서울", date: "2027년 8월 3-8일", coordinates: [37.5665, 126.9780], theme: "용기를 내어라! 내가 세상을 이겼다.", attendance: "Upcoming", description: "동아시아 및 그리스도교 소수 국가에서 처음으로 열리는 대회. 교황 레오 14세가 처음으로 주최함." }
   ],
   es: window.wydDataByLang?.en || [],
   it: window.wydDataByLang?.en || [],
