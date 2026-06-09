@@ -2,5 +2,7 @@
   "framework": null,
   "buildCommand": "echo \"Ready\"",
   "installCommand": "echo \"Ready\"",
-  "outputDirectory": "."
+  "outputDirectory": ".",
+  "trailingSlash": true,
+  "cleanUrls": true
 }
