@@ -1,0 +1,6 @@
+{
+  "framework": null,
+  "buildCommand": "echo \"Ready\"",
+  "installCommand": "echo \"Ready\"",
+  "outputDirectory": "."
+}
