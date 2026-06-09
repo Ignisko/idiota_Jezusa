@@ -54,13 +54,21 @@ h1, h2, h3, h4, h5, h6 {
   backface-visibility: hidden;
   transform: translateZ(0);
 }
+.leaflet-marker-pane {
+  transition: opacity 0.8s ease;
+}
+#map.hide-markers .leaflet-marker-pane {
+  opacity: 0;
+  pointer-events: none;
+}
+
 .marker-dot {
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
   background-color: var(--accent-gold);
-  border: 3px solid #fff;
+  border: none;
   border-radius: 50% !important;
-  box-shadow: 0 0 15px var(--accent-yellow) !important;
+  box-shadow: 0 0 15px rgba(230, 43, 58, 0.6) !important;
   will-change: transform;
   backface-visibility: hidden;
   transform: translateZ(0);

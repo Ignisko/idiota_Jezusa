@@ -27,6 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const timelineContainer = document.getElementById('dynamic-timeline');
   const placeList = document.getElementById('place-list');
   const introScreen = document.getElementById('intro-screen');
+  const mapEl = document.getElementById('map');
   const latlngs = [];
 
   // 2. Populate Sidebar and Timeline Cards
@@ -121,6 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (introScreen && entry.target.id !== 'intro-screen') {
           introScreen.style.opacity = '0';
           introScreen.style.transition = 'opacity 0.6s ease';
+          if (mapEl) mapEl.classList.remove('hide-markers');
         }
 
         const index = entry.target.getAttribute('data-index');
@@ -145,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
               currentTargetCoords = data.coordinates;
               map.flyTo(data.coordinates, 8, {
                 animate: true,
-                duration: 4.5
+                duration: 7.0
               });
             }
           }
@@ -159,7 +161,7 @@ document.addEventListener('DOMContentLoaded', () => {
              // Fly to Warsaw
              map.flyTo([52.2297, 21.0122], 8, {
                animate: true,
-               duration: 4.5
+               duration: 7.0
              });
            }
         } else if (entry.target.id === 'card-symbols') {
@@ -195,6 +197,7 @@ document.addEventListener('DOMContentLoaded', () => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
            introScreen.style.opacity = '1';
+           if (mapEl) mapEl.classList.add('hide-markers');
            cards.forEach(c => c.classList.remove('active')); // clear cards when at top
            navLinks.forEach(link => {
              if (link.getAttribute('data-id') === 'home') {
@@ -211,7 +214,7 @@ document.addEventListener('DOMContentLoaded', () => {
            // Fly back to original view
            map.flyTo([41.9029, 12.4534], 4, {
              animate: true,
-             duration: 4.5
+             duration: 7.0
            });
         }
       });
