@@ -86,7 +86,7 @@ h1, h2, h3, h4, h5, h6 {
   position: absolute;
   left: 20px;
   background: transparent;
-  color: #1a1a1a;
+  color: #888888;
   font-family: var(--font-heading);
   font-size: 1.25rem;
   font-weight: 700;
@@ -106,6 +106,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .custom-map-marker.active-pin .city-label {
   color: var(--accent-blue);
+  text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff, 0 0 15px rgba(255,255,255,1);
 }
 
 /* Right Side Navigation List */
