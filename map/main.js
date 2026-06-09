@@ -18,12 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
     keepBuffer: 12
   }).addTo(map);
 
-  const markerIcon = L.divIcon({
-    className: 'custom-map-marker',
-    html: '<div class="marker-dot"></div>',
-    iconSize: [24, 24],
-    iconAnchor: [12, 12]
-  });
+
 
   const timelineContainer = document.getElementById('dynamic-timeline');
   const placeList = document.getElementById('place-list');
@@ -38,13 +33,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
   wydData.forEach((data, index) => {
     latlngs.push(data.coordinates);
-    
-    L.marker(data.coordinates, { icon: markerIcon }).addTo(map);
 
     // Strip country to save space, and explicitly shorten long names
     let navLabel = data.location.split(',')[0];
     if (navLabel === "Santiago de Compostela") navLabel = "Santiago";
     if (navLabel === "Vatican City") navLabel = "Vatican";
+
+    const specificIcon = L.divIcon({
+      className: `custom-map-marker marker-${data.id}`,
+      html: '<div class="marker-dot"></div>',
+      iconSize: [24, 24],
+      iconAnchor: [12, 12]
+    });
+
+    const marker = L.marker(data.coordinates, { icon: specificIcon }).addTo(map);
+    
+    marker.bindTooltip(navLabel, {
+      permanent: true,
+      direction: 'right',
+      className: 'city-label',
+      offset: [10, 0]
+    });
 
     const li = document.createElement('li');
     li.innerHTML = `<a href="#card-${data.id}" data-id="${data.id}">${navLabel}</a>`;
@@ -135,6 +144,10 @@ document.addEventListener('DOMContentLoaded', () => {
           if (currentActiveId !== data.id) {
             currentActiveId = data.id;
 
+            document.querySelectorAll('.custom-map-marker').forEach(el => el.classList.remove('active-pin'));
+            const activeMarker = document.querySelector(`.marker-${data.id}`);
+            if (activeMarker) activeMarker.classList.add('active-pin');
+
             navLinks.forEach(link => {
               if (link.getAttribute('data-id') === data.id) {
                 link.classList.add('active');
@@ -200,6 +213,7 @@ document.addEventListener('DOMContentLoaded', () => {
            introScreen.style.opacity = '1';
            if (mapEl) mapEl.classList.add('hide-markers');
            cards.forEach(c => c.classList.remove('active')); // clear cards when at top
+           document.querySelectorAll('.custom-map-marker').forEach(el => el.classList.remove('active-pin'));
            navLinks.forEach(link => {
              if (link.getAttribute('data-id') === 'home') {
                link.classList.add('active');
