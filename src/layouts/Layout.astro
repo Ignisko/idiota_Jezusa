@@ -91,6 +91,13 @@ const { title } = Astro.props;
 				height: 100%;
 				transition: opacity 0.3s ease;
 			}
+			:root[data-theme="light"] .logo-bw {
+				mix-blend-mode: multiply;
+			}
+			:root[data-theme="dark"] .logo-bw {
+				filter: invert(1);
+				mix-blend-mode: screen;
+			}
 			.logo-color {
 				opacity: 0;
 			}
