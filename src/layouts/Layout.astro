@@ -1,7 +1,26 @@
 ---
-const { title } = Astro.props;
+const { title, lang = 'en' } = Astro.props;
+
+const isPl = lang === 'pl';
+const homeLink = isPl ? '/pl/' : '/';
+const aboutLink = isPl ? '/pl/about' : '/about';
+const homeText = isPl ? 'Strona główna' : 'Home';
+const aboutText = isPl ? 'O mnie' : 'About';
+
+let currentPath = Astro.url.pathname;
+if (currentPath.length > 1 && currentPath.endsWith('/')) {
+	currentPath = currentPath.slice(0, -1);
+}
+
+let alternatePath;
+if (isPl) {
+	alternatePath = currentPath.replace(/^\/pl/, '');
+	if (alternatePath === '') alternatePath = '/';
+} else {
+	alternatePath = currentPath === '/' ? '/pl/' : `/pl${currentPath}`;
+}
 ---
-<html lang="en">
+<html lang={lang}>
 	<head>
 		<meta charset="utf-8" />
 		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
@@ -75,8 +94,19 @@ const { title } = Astro.props;
 			header {
 				display: flex;
 				align-items: center;
+				justify-content: space-between;
 				margin-bottom: 4rem;
+			}
+			.header-left {
+				display: flex;
+				align-items: center;
 				gap: 1.5rem;
+			}
+			.header-right {
+				display: flex;
+				align-items: center;
+				gap: 1.5rem;
+				font-family: 'Courier Prime', monospace;
 			}
 			.logo-container {
 				position: relative;
@@ -98,6 +128,10 @@ const { title } = Astro.props;
 				filter: invert(1);
 				mix-blend-mode: screen;
 			}
+			:root[data-theme="light"] .theme-icon-sun { display: none; }
+			:root[data-theme="light"] .theme-icon-moon { display: block; }
+			:root[data-theme="dark"] .theme-icon-sun { display: block; }
+			:root[data-theme="dark"] .theme-icon-moon { display: none; }
 			.logo-color {
 				opacity: 0;
 			}
@@ -138,21 +172,31 @@ const { title } = Astro.props;
 	<body>
 		<main>
 			<header>
-				<a href="/">
-					<div class="logo-container">
-						<img src="/images/Cross-b_w-removebg.png" alt="Cross Black and White" class="logo-bw" />
-						<img src="/images/Cross-color-removebg.png" alt="Cross Color" class="logo-color" />
+				<div class="header-left">
+					<a href={homeLink}>
+						<div class="logo-container">
+							<img src="/images/Cross-b_w-removebg.png" alt="Cross Black and White" class="logo-bw" />
+							<img src="/images/Cross-color-removebg.png" alt="Cross Color" class="logo-color" />
+						</div>
+					</a>
+					<div>
+						<div class="title" style="margin-bottom: 0.8rem; font-size: 1.5rem; color: var(--text);">Idiota Jezusa</div>
+						<nav>
+							<a href={homeLink}>{homeText}</a>
+							<a href={aboutLink}>{aboutText}</a>
+						</nav>
 					</div>
-				</a>
-				<div>
-					<div class="title" style="margin-bottom: 0.8rem; font-size: 1.5rem; color: var(--text);">Idiota Jezusa</div>
-					<nav>
-						<a href="/">Home</a>
-						<a href="/about">About</a>
-						<button id="theme-toggle" style="background: none; border: none; cursor: pointer; color: var(--text); padding: 0; font-family: inherit; font-size: inherit;">
-							🌙
-						</button>
-					</nav>
+				</div>
+				<div class="header-right">
+					<div class="lang-toggle" style="font-size: 1.2rem;">
+						<a href={isPl ? alternatePath : '#'} style={isPl ? "opacity: 0.5;" : "font-weight: bold; pointer-events: none; color: var(--text);"}>EN</a>
+						<span style="opacity: 0.5;">|</span>
+						<a href={!isPl ? alternatePath : '#'} style={!isPl ? "opacity: 0.5;" : "font-weight: bold; pointer-events: none; color: var(--text);"}>PL</a>
+					</div>
+					<button id="theme-toggle" style="background: none; border: none; cursor: pointer; color: var(--text); padding: 0; display: flex; align-items: center;" aria-label="Toggle Theme">
+						<svg class="theme-icon-sun" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+						<svg class="theme-icon-moon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+					</button>
 				</div>
 			</header>
 			<slot />
@@ -163,18 +207,12 @@ const { title } = Astro.props;
 		<script is:inline>
 			const toggleBtn = document.getElementById('theme-toggle');
 			const html = document.documentElement;
-			
-			// Set initial icon
-			if (html.getAttribute('data-theme') === 'dark') {
-				toggleBtn.textContent = '🌞';
-			}
 
 			toggleBtn.addEventListener('click', () => {
 				const currentTheme = html.getAttribute('data-theme') || 'light';
 				const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
 				html.setAttribute('data-theme', newTheme);
 				localStorage.setItem('theme', newTheme);
-				toggleBtn.textContent = newTheme === 'dark' ? '🌞' : '🌙';
 			});
 		</script>
 	</body>
