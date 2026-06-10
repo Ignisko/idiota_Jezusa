@@ -197,9 +197,9 @@ if (isPl) {
 				</div>
 				<div class="header-right">
 					<div class="lang-toggle" style="font-size: 1.2rem;">
-						<a href={alternatePath} style="font-weight: bold; color: var(--text); text-decoration: none;">
-							{isPl ? 'EN' : 'PL'}
-						</a>
+						<a href={isPl ? alternatePath : '#'} style={isPl ? "opacity: 0.5; color: var(--text); text-decoration: none;" : "font-weight: bold; pointer-events: none; color: var(--text); text-decoration: none;"}>EN</a>
+						<span style="opacity: 0.5; margin: 0 0.3rem;">|</span>
+						<a href={!isPl ? alternatePath : '#'} style={!isPl ? "opacity: 0.5; color: var(--text); text-decoration: none;" : "font-weight: bold; pointer-events: none; color: var(--text); text-decoration: none;"}>PL</a>
 					</div>
 					<button id="theme-toggle" style="background: none; border: none; cursor: pointer; color: var(--text); padding: 0; display: flex; align-items: center;" aria-label="Toggle Theme">
 						<svg class="theme-icon-sun" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
