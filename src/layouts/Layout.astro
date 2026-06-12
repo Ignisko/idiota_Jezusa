@@ -175,6 +175,43 @@ if (isPl) {
 				display: block;
 				margin-top: 0.2rem;
 			}
+			.fish-container {
+				margin-top: 0.8rem;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				height: 60px;
+				overflow: visible;
+			}
+			.fish {
+				font-family: monospace;
+				color: var(--text);
+				font-size: 1.2rem;
+				cursor: pointer;
+				transition: all 0.3s ease;
+				display: inline-block;
+				user-select: none;
+				margin: 0;
+			}
+			.fish:hover {
+				transform: scale(1.1);
+			}
+			.fish.jump {
+				animation: fishJump 0.8s ease-in-out;
+			}
+			.fish.cross {
+				font-family: serif;
+				font-size: 2rem;
+				font-weight: bold;
+				color: var(--accent);
+			}
+			@keyframes fishJump {
+				0% { transform: translateY(0) rotate(0deg); }
+				25% { transform: translateY(-40px) rotate(-15deg); }
+				50% { transform: translateY(-60px) rotate(0deg); }
+				75% { transform: translateY(-40px) rotate(15deg); }
+				100% { transform: translateY(0) rotate(0deg); }
+			}
 		</style>
 	</head>
 	<body>
@@ -227,7 +264,10 @@ if (isPl) {
 			</header>
 			<slot />
 			<footer>
-				&copy; mmxxvi <a href="https://spol.ski" target="_blank">spol.ski</a> ✝️
+				&copy; mmxxvi <a href="https://spol.ski" target="_blank">spol.ski</a>
+				<div class="fish-container">
+					<pre class="fish" id="fish">>((('></pre>
+				</div>
 			</footer>
 		</main>
 		<script is:inline>
@@ -240,6 +280,50 @@ if (isPl) {
 				html.setAttribute('data-theme', newTheme);
 				localStorage.setItem('theme', newTheme);
 			});
+
+			const fish = document.getElementById('fish');
+			let hasJumped = false;
+			let isCross = false;
+
+			const footerObserver = new IntersectionObserver((entries) => {
+				entries.forEach(entry => {
+					if (entry.isIntersecting && !hasJumped) {
+						fish.classList.add('jump');
+						hasJumped = true;
+						setTimeout(() => {
+							fish.classList.remove('jump');
+							hasJumped = false;
+						}, 800);
+					}
+				});
+			}, { threshold: 0.5 });
+
+			const footer = document.querySelector('footer');
+			if (footer && fish) {
+				footerObserver.observe(footer);
+			}
+
+			if (fish) {
+				fish.addEventListener('click', () => {
+					if (isCross) {
+						fish.classList.add('jump');
+						setTimeout(() => {
+							fish.textContent = '>(((\'>';
+							fish.classList.remove('cross');
+							fish.classList.remove('jump');
+							isCross = false;
+						}, 400);
+					} else {
+						fish.classList.add('jump');
+						setTimeout(() => {
+							fish.textContent = '✝';
+							fish.classList.add('cross');
+							fish.classList.remove('jump');
+							isCross = true;
+						}, 800);
+					}
+				});
+			}
 		</script>
 	</body>
 </html>
