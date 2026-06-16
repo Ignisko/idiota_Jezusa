@@ -1,0 +1,20 @@
+{
+  "redirects": [
+    {
+      "source": "/road2wyd",
+      "destination": "https://www.road2wyd.com/"
+    },
+    {
+      "source": "/road2wyd/(.*)",
+      "destination": "https://www.road2wyd.com/$1"
+    },
+    {
+      "source": "/papaya",
+      "destination": "https://papaya.vercel.app/"
+    },
+    {
+      "source": "/papaya/(.*)",
+      "destination": "https://papaya.vercel.app/$1"
+    }
+  ]
+}
