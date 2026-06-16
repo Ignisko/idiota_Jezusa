@@ -7,6 +7,14 @@
     {
       "source": "/road2wyd/(.*)",
       "destination": "https://www.road2wyd.com/$1"
+    },
+    {
+      "source": "/papaya",
+      "destination": "https://papaya-coral.vercel.app/"
+    },
+    {
+      "source": "/papaya/(.*)",
+      "destination": "https://papaya-coral.vercel.app/$1"
     }
   ]
 }
