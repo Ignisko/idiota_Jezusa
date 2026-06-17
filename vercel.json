@@ -15,6 +15,14 @@
     {
       "source": "/papaya/(.*)",
       "destination": "https://papaya-coral.vercel.app/$1"
+    },
+    {
+      "source": "/missa",
+      "destination": "https://missa-navy.vercel.app/"
+    },
+    {
+      "source": "/missa/(.*)",
+      "destination": "https://missa-navy.vercel.app/$1"
     }
   ]
 }
