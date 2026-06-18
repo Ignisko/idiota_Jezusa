@@ -1,5 +1,5 @@
 ---
-const { title, lang = 'en' } = Astro.props;
+const { title, lang = 'en', hideNav = false, hideHeader = false } = Astro.props;
 
 const isPl = lang === 'pl';
 const homeLink = isPl ? '/pl/' : '/';
@@ -216,52 +216,56 @@ if (isPl) {
 	</head>
 	<body>
 		<main>
-			<header>
-				<div class="header-left">
-					<a href={homeLink}>
-						<div class="logo-container">
-							<img src="/images/Cross-b_w-removebg.png" alt="Cross Black and White" class="logo-bw" />
-							<img src="/images/Cross-color-removebg.png" alt="Cross Color" class="logo-color" />
+			{!hideHeader && (
+				<header>
+					<div class="header-left">
+						<a href={homeLink}>
+							<div class="logo-container">
+								<img src="/images/Cross-b_w-removebg.png" alt="Cross Black and White" class="logo-bw" />
+								<img src="/images/Cross-color-removebg.png" alt="Cross Color" class="logo-color" />
+							</div>
+						</a>
+						<div>
+							<div class="title" style="margin-bottom: 0.8rem; font-size: 1.5rem; color: var(--text);">Idiota Jezusa</div>
+							{!hideNav && (
+								<nav>
+									<a href={homeLink}>{homeText}</a>
+									<a href={aboutLink}>{aboutText}</a>
+								</nav>
+							)}
 						</div>
-					</a>
-					<div>
-						<div class="title" style="margin-bottom: 0.8rem; font-size: 1.5rem; color: var(--text);">Idiota Jezusa</div>
-						<nav>
-							<a href={homeLink}>{homeText}</a>
-							<a href={aboutLink}>{aboutText}</a>
-						</nav>
 					</div>
-				</div>
-				<div class="header-right">
-					<div class="lang-toggle" style="font-size: 1.2rem;">
-						<a href={isPl ? alternatePath : '#'} style={isPl ? "opacity: 0.5; color: var(--text); text-decoration: none;" : "font-weight: bold; pointer-events: none; color: var(--text); text-decoration: none;"}>EN</a>
-						<span style="opacity: 0.5; margin: 0 0.3rem;">|</span>
-						<a href={!isPl ? alternatePath : '#'} style={!isPl ? "opacity: 0.5; color: var(--text); text-decoration: none;" : "font-weight: bold; pointer-events: none; color: var(--text); text-decoration: none;"}>PL</a>
+					<div class="header-right">
+						<div class="lang-toggle" style="font-size: 1.2rem;">
+							<a href={isPl ? alternatePath : '#'} style={isPl ? "opacity: 0.5; color: var(--text); text-decoration: none;" : "font-weight: bold; pointer-events: none; color: var(--text); text-decoration: none;"}>EN</a>
+							<span style="opacity: 0.5; margin: 0 0.3rem;">|</span>
+							<a href={!isPl ? alternatePath : '#'} style={!isPl ? "opacity: 0.5; color: var(--text); text-decoration: none;" : "font-weight: bold; pointer-events: none; color: var(--text); text-decoration: none;"}>PL</a>
+						</div>
+						<button id="theme-toggle" style="background: none; border: none; cursor: pointer; color: var(--text); padding: 0; display: flex; align-items: center;" aria-label="Toggle Theme">
+							<svg class="theme-icon-sun" width="24" height="24" viewBox="0 0 16 16" fill="currentColor">
+								<rect x="5" y="5" width="6" height="6" />
+								<rect x="7" y="1" width="2" height="2" />
+								<rect x="7" y="13" width="2" height="2" />
+								<rect x="1" y="7" width="2" height="2" />
+								<rect x="13" y="7" width="2" height="2" />
+								<rect x="3" y="3" width="2" height="2" />
+								<rect x="11" y="3" width="2" height="2" />
+								<rect x="3" y="11" width="2" height="2" />
+								<rect x="11" y="11" width="2" height="2" />
+							</svg>
+							<svg class="theme-icon-moon" width="24" height="24" viewBox="0 0 16 16" fill="currentColor">
+								<rect x="9" y="2" width="4" height="2" />
+								<rect x="13" y="4" width="2" height="2" />
+								<rect x="7" y="4" width="2" height="2" />
+								<rect x="5" y="6" width="2" height="4" />
+								<rect x="7" y="10" width="2" height="2" />
+								<rect x="9" y="12" width="4" height="2" />
+								<rect x="13" y="10" width="2" height="2" />
+							</svg>
+						</button>
 					</div>
-					<button id="theme-toggle" style="background: none; border: none; cursor: pointer; color: var(--text); padding: 0; display: flex; align-items: center;" aria-label="Toggle Theme">
-						<svg class="theme-icon-sun" width="24" height="24" viewBox="0 0 16 16" fill="currentColor">
-							<rect x="5" y="5" width="6" height="6" />
-							<rect x="7" y="1" width="2" height="2" />
-							<rect x="7" y="13" width="2" height="2" />
-							<rect x="1" y="7" width="2" height="2" />
-							<rect x="13" y="7" width="2" height="2" />
-							<rect x="3" y="3" width="2" height="2" />
-							<rect x="11" y="3" width="2" height="2" />
-							<rect x="3" y="11" width="2" height="2" />
-							<rect x="11" y="11" width="2" height="2" />
-						</svg>
-						<svg class="theme-icon-moon" width="24" height="24" viewBox="0 0 16 16" fill="currentColor">
-							<rect x="9" y="2" width="4" height="2" />
-							<rect x="13" y="4" width="2" height="2" />
-							<rect x="7" y="4" width="2" height="2" />
-							<rect x="5" y="6" width="2" height="4" />
-							<rect x="7" y="10" width="2" height="2" />
-							<rect x="9" y="12" width="4" height="2" />
-							<rect x="13" y="10" width="2" height="2" />
-						</svg>
-					</button>
-				</div>
-			</header>
+				</header>
+			)}
 			<slot />
 			<footer>
 				&copy; mmxxvi <a href="https://spol.ski" target="_blank">spol.ski</a>
