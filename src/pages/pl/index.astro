@@ -11,42 +11,108 @@ import Layout from '../../layouts/Layout.astro';
 
 	<h2>Sprawdź moje projekty:</h2>
 	
-	<ul class="list-inside list-disc" role="list">
-		<li>
-			<a href="https://stellamaris.help/" target="_blank" class="cactus-link">⭐ Stella Maris</a><br/>
-			<span class="project-desc"><b>A</b>tlas objawień maryjnych na całym świecie.</span>
+	<ul class="project-list" role="list">
+		<li class="project-card">
+			<div class="project-header">
+				<a href="https://stellamaris.help/" target="_blank" class="cactus-link project-title">⭐ Stella Maris</a>
+				<span class="project-status">[Live]</span>
+			</div>
+			<span class="project-desc">Atlas objawień maryjnych na całym świecie.</span>
+			<div class="project-tags">
+				<span class="tag">#leaflet</span>
+				<span class="tag">#react</span>
+				<span class="tag">#atlas</span>
+			</div>
 		</li>
-		<li>
-			<a href="https://road2wyd.com/" target="_blank" class="cactus-link">🗺️ World Youth Day Map</a><br/>
-			<span class="project-desc"><b>V</b>ademecum historii ŚDM przez dekady i kontynenty.</span>
+		<li class="project-card">
+			<div class="project-header">
+				<a href="https://road2wyd.com/" target="_blank" class="cactus-link project-title">🗺️ World Youth Day Map</a>
+				<span class="project-status">[Live]</span>
+			</div>
+			<span class="project-desc">Vademecum historii ŚDM przez dekady i kontynenty.</span>
+			<div class="project-tags">
+				<span class="tag">#leaflet</span>
+				<span class="tag">#data-viz</span>
+				<span class="tag">#atlas</span>
+			</div>
 		</li>
-		<li>
-			<a href="http://eucharisticmiracles.info/" target="_blank" class="cactus-link">🥖 Eucharistic Miracles</a><br/>
-			<span class="project-desc"><b>E</b>ucharystyczne cuda z całego świata, rzeczywiście udokumentowane. Zainspirowane przez św. Carlo Acutisa.</span>
+		<li class="project-card">
+			<div class="project-header">
+				<a href="http://eucharisticmiracles.info/" target="_blank" class="cactus-link project-title">🥖 Eucharistic Miracles</a>
+				<span class="project-status">[Live]</span>
+			</div>
+			<span class="project-desc">Eucharystyczne cuda z całego świata, rzeczywiście udokumentowane. Zainspirowane przez św. Carlo Acutisa.</span>
+			<div class="project-tags">
+				<span class="tag">#leaflet</span>
+				<span class="tag">#miracles</span>
+			</div>
 		</li>
-		<li>
-			<a href="https://www.idiotajezusa.pl/missa" target="_blank" class="cactus-link">🌍 Missa</a><br/>
-			<span class="project-desc"><b>M</b>issa – Adoracja Globalnej Obecności Eucharystycznej.</span>
+		<li class="project-card">
+			<div class="project-header">
+				<a href="https://www.idiotajezusa.pl/missa" target="_blank" class="cactus-link project-title">🌍 Missa</a>
+				<span class="project-status">[Live]</span>
+			</div>
+			<span class="project-desc">Missa – Adoracja Globalnej Obecności Eucharystycznej.</span>
+			<div class="project-tags">
+				<span class="tag">#leaflet</span>
+				<span class="tag">#prayer</span>
+				<span class="tag">#atlas</span>
+			</div>
 		</li>
-		<li>
-			<a href="https://pelegrin.cloud/" target="_blank" class="cactus-link">✝️ Pelegrin</a><br/>
-			<span class="project-desc"><b>A</b>plikacja dla katolickich pielgrzymów. Łącz się, nawiguj wydarzenia i pogłębiaj swoją drogę wiary.</span>
+		<li class="project-card">
+			<div class="project-header">
+				<a href="https://pelegrin.cloud/" target="_blank" class="cactus-link project-title">✝️ Pelegrin</a>
+				<span class="project-status">[Beta]</span>
+			</div>
+			<span class="project-desc">Aplikacja dla katolickich pielgrzymów. Łącz się, nawiguj wydarzenia i pogłębiaj swoją drogę wiary.</span>
+			<div class="project-tags">
+				<span class="tag">#app</span>
+				<span class="tag">#community</span>
+			</div>
 		</li>
-		<li>
-			<a href="https://www.idiotajezusa.pl/rosarium" target="_blank" class="cactus-link">📿 Rosarium</a><br/>
-			<span class="project-desc"><b>R</b>óżaniec Święty w formie interaktywnego, cyfrowego przewodnika.</span>
+		<li class="project-card">
+			<div class="project-header">
+				<a href="https://www.idiotajezusa.pl/rosarium" target="_blank" class="cactus-link project-title">📿 Rosarium</a>
+				<span class="project-status">[Live]</span>
+			</div>
+			<span class="project-desc">Różaniec Święty w formie interaktywnego, cyfrowego przewodnika.</span>
+			<div class="project-tags">
+				<span class="tag">#prayer</span>
+				<span class="tag">#interactive</span>
+			</div>
 		</li>
-		<li>
-			<a href="https://bibbia-rete.vercel.app/" target="_blank" class="cactus-link">📖 Bibbia rete</a><br/>
-			<span class="project-desc"><b>I</b>nteraktywne sieci powiązań postaci biblijnych z przekładu Douay-Rheims.</span>
+		<li class="project-card">
+			<div class="project-header">
+				<a href="https://bibbia-rete.vercel.app/" target="_blank" class="cactus-link project-title">📖 Bibbia rete</a>
+				<span class="project-status">[Live]</span>
+			</div>
+			<span class="project-desc">Interaktywne sieci powiązań postaci biblijnych z przekładu Douay-Rheims.</span>
+			<div class="project-tags">
+				<span class="tag">#data-viz</span>
+				<span class="tag">#scripture</span>
+			</div>
 		</li>
-		<li>
-			<a href="https://www.idiotajezusa.pl/ecclesia" target="_blank" class="cactus-link">⛪ Ecclesia</a><br/>
-			<span class="project-desc"><b>A</b>tlas globalnego Kościoła Katolickiego (w przygotowaniu).</span>
+		<li class="project-card">
+			<div class="project-header">
+				<a href="https://www.idiotajezusa.pl/ecclesia" target="_blank" class="cactus-link project-title">⛪ Ecclesia</a>
+				<span class="project-status">[WIP]</span>
+			</div>
+			<span class="project-desc">Atlas globalnego Kościoła Katolickiego (w przygotowaniu).</span>
+			<div class="project-tags">
+				<span class="tag">#leaflet</span>
+				<span class="tag">#atlas</span>
+			</div>
 		</li>
-		<li>
-			<a href="https://www.idiotajezusa.pl/papaya" target="_blank" class="cactus-link">✞ Katalog Świętych</a><br/>
-			<span class="project-desc"><b>A</b>rchiwum i inspirujący, kompleksowy katalog świętych.</span>
+		<li class="project-card">
+			<div class="project-header">
+				<a href="https://www.idiotajezusa.pl/papaya" target="_blank" class="cactus-link project-title">✞ Katalog Świętych</a>
+				<span class="project-status">[Live]</span>
+			</div>
+			<span class="project-desc">Archiwum i inspirujący, kompleksowy katalog świętych.</span>
+			<div class="project-tags">
+				<span class="tag">#archive</span>
+				<span class="tag">#saints</span>
+			</div>
 		</li>
 	</ul>
 </Layout>

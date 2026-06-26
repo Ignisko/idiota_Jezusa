@@ -32,11 +32,13 @@ if (isPl) {
 		<title>{title} | Idiota Jezusa</title>
 		<link href="https://fonts.googleapis.com/css2?family=VT323&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 		<script is:inline>
+			// Force light mode as default if nothing is saved
 			const theme = localStorage.getItem('theme') || 'light';
 			document.documentElement.setAttribute('data-theme', theme);
 		</script>
 		<style is:global>
 			:root {
+				color-scheme: light;
 				/* Solarized Light (Base) */
 				--bg: #fdf6e3;
 				--text: #586e75;
@@ -45,6 +47,7 @@ if (isPl) {
 				--title: #b58900;
 			}
 			:root[data-theme="dark"] {
+				color-scheme: dark;
 				/* Solarized Dark */
 				--bg: #002b36;
 				--text: #839496;
@@ -211,6 +214,51 @@ if (isPl) {
 				50% { transform: translateY(-60px) rotate(0deg); }
 				75% { transform: translateY(-40px) rotate(15deg); }
 				100% { transform: translateY(0) rotate(0deg); }
+			}
+
+			.project-list {
+				list-style: none;
+				padding: 0;
+				display: grid;
+				gap: 1.5rem;
+			}
+			.project-card {
+				border: 1px dashed var(--text);
+				padding: 1.5rem;
+				transition: transform 0.2s, box-shadow 0.2s;
+				background-color: var(--bg);
+			}
+			.project-card:hover {
+				transform: translateY(-2px);
+				box-shadow: 4px 4px 0 var(--accent);
+			}
+			.project-header {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				margin-bottom: 0.5rem;
+			}
+			.project-title {
+				font-family: 'VT323', monospace;
+				font-size: 1.6rem;
+			}
+			.project-status {
+				font-size: 0.9rem;
+				opacity: 0.8;
+				font-family: 'Courier Prime', monospace;
+			}
+			.project-tags {
+				margin-top: 1rem;
+				display: flex;
+				flex-wrap: wrap;
+				gap: 0.5rem;
+			}
+			.tag {
+				font-size: 0.85rem;
+				border: 1px solid var(--text);
+				padding: 0.1rem 0.5rem;
+				border-radius: 4px;
+				opacity: 0.7;
 			}
 		</style>
 	</head>
