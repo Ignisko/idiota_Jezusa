@@ -3,14 +3,84 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout title="About" lang="en">
-	<h1>Credits & Thanks</h1>
+	<h1>about me</h1>
 	
-	<ul style="margin-top: 2rem;">
-		<li>
-			<strong>Spiritual Support:</strong> Big thanks to Jesus, Mary Mother of God, my Guardian Angel, and all the Saints.
-		</li>
-		<li>
-			<strong>Code Base:</strong> Built using Astro. Theme inspired by Chris Williams.
-		</li>
-	</ul>
+	<p style="margin-top: 2rem;">
+		hi, i'm Ignacy, based in poland. i combine business sense with data analytics to build useful products.
+	</p>
+	
+	<p>
+		my experience spans product operations, growth hacking, and ai solutions development across europe and asia. i strongly believe in data-driven decisions and rapid prototyping.
+	</p>
+
+	<h2>contact</h2>
+	<form action="https://formsubmit.co/ignacyjanuszek@gmail.com" method="POST" class="contact-form">
+		<input type="hidden" name="_subject" value="New message from idiotajezusa.pl">
+		<div class="form-group">
+			<label for="name">name:</label>
+			<input type="text" id="name" name="name" required />
+		</div>
+		<div class="form-group">
+			<label for="email">email:</label>
+			<input type="email" id="email" name="email" required />
+		</div>
+		<div class="form-group">
+			<label for="message">message:</label>
+			<textarea id="message" name="message" rows="4" required></textarea>
+		</div>
+		<button type="submit">> send</button>
+	</form>
+
+	<h2>dedication</h2>
+	<p style="opacity: 0.8; font-style: italic;">
+		all work is dedicated ad majorem dei gloriam. deeply grateful for the continuous spiritual guidance of jesus, mary, my guardian angel, and all the saints.
+	</p>
+	<p style="opacity: 0.8; font-style: italic; margin-top: 1rem;">
+		built with Astro. theme inspired by Chris Williams.
+	</p>
 </Layout>
+
+<style>
+	.contact-form {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+		max-width: 400px;
+		margin-top: 1rem;
+		margin-bottom: 2rem;
+	}
+	.form-group {
+		display: flex;
+		flex-direction: column;
+	}
+	.contact-form label {
+		font-family: 'VT323', monospace;
+		font-size: 1.4rem;
+	}
+	.contact-form input, .contact-form textarea {
+		background: var(--bg);
+		border: 2px solid var(--text);
+		color: var(--text);
+		font-family: 'Courier Prime', monospace;
+		padding: 0.5rem;
+		font-size: 1rem;
+	}
+	.contact-form input:focus, .contact-form textarea:focus {
+		outline: none;
+		border-color: var(--accent);
+	}
+	.contact-form button {
+		background: var(--text);
+		color: var(--bg);
+		border: none;
+		padding: 0.5rem 1rem;
+		font-family: 'VT323', monospace;
+		font-size: 1.4rem;
+		cursor: pointer;
+		text-transform: uppercase;
+		align-self: flex-start;
+	}
+	.contact-form button:hover {
+		background: var(--accent);
+	}
+</style>
