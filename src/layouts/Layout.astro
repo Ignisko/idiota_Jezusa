@@ -6,6 +6,7 @@ const homeLink = isPl ? '/pl/' : '/';
 const aboutLink = isPl ? '/pl/about' : '/about';
 const homeText = isPl ? 'Strona główna' : 'Home';
 const aboutText = isPl ? 'O mnie' : 'About';
+const siteTitle = isPl ? 'Idiota Jezusa' : 'A fool for Jesus';
 
 let currentPath = Astro.url.pathname;
 if (currentPath.length > 1 && currentPath.endsWith('/')) {
@@ -33,7 +34,7 @@ const plUrl = basePath === '/' ? `${plDomain}/pl/` : `${plDomain}/pl${basePath}`
 		<link rel="manifest" href="/site.webmanifest" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<title>{title} | Idiota Jezusa</title>
+		<title>{title} | {siteTitle}</title>
 		<link href="https://fonts.googleapis.com/css2?family=VT323&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 		<script is:inline>
 			// Enforce correct domain for language
@@ -318,7 +319,7 @@ const plUrl = basePath === '/' ? `${plDomain}/pl/` : `${plDomain}/pl${basePath}`
 							</div>
 						</a>
 						<div>
-							<div class="title" style="margin-bottom: 0.8rem; font-size: 1.5rem; color: var(--text);">Idiota Jezusa</div>
+							<div class="title" style="margin-bottom: 0.8rem; font-size: 1.5rem; color: var(--text);">{siteTitle}</div>
 							{!hideNav && (
 								<nav>
 									<a href={homeLink}>{homeText}</a>
