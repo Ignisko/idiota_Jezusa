@@ -12,13 +12,17 @@ if (currentPath.length > 1 && currentPath.endsWith('/')) {
 	currentPath = currentPath.slice(0, -1);
 }
 
-let alternatePath;
+let basePath = currentPath;
 if (isPl) {
-	alternatePath = currentPath.replace(/^\/pl/, '');
-	if (alternatePath === '') alternatePath = '/';
-} else {
-	alternatePath = currentPath === '/' ? '/pl/' : `/pl${currentPath}`;
+	basePath = currentPath.replace(/^\/pl/, '');
 }
+if (basePath === '') basePath = '/';
+
+const enDomain = 'https://www.afoolforjesus.org';
+const plDomain = 'https://www.idiotajezusa.pl';
+
+const enUrl = basePath === '/' ? enDomain : `${enDomain}${basePath}`;
+const plUrl = basePath === '/' ? `${plDomain}/pl/` : `${plDomain}/pl${basePath}`;
 ---
 <html lang={lang}>
 	<head>
@@ -32,6 +36,20 @@ if (isPl) {
 		<title>{title} | Idiota Jezusa</title>
 		<link href="https://fonts.googleapis.com/css2?family=VT323&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 		<script is:inline>
+			// Enforce correct domain for language
+			const isPl = document.documentElement.lang === 'pl';
+			const host = window.location.hostname;
+			
+			if (host !== 'localhost' && !host.includes('127.0.0')) {
+				if (host.includes('afoolforjesus') && isPl) {
+					// Polish page on English domain -> redirect to Polish domain
+					window.location.replace('https://www.idiotajezusa.pl' + window.location.pathname);
+				} else if (host.includes('idiotajezusa') && !isPl) {
+					// English page on Polish domain -> redirect to Polish directory
+					window.location.replace('https://www.idiotajezusa.pl/pl' + window.location.pathname);
+				}
+			}
+
 			// Force light mode as default if nothing is saved
 			const theme = localStorage.getItem('theme') || 'light';
 			document.documentElement.setAttribute('data-theme', theme);
@@ -311,9 +329,9 @@ if (isPl) {
 					</div>
 					<div class="header-right">
 						<div class="lang-toggle" style="font-size: 1.2rem;">
-							<a href={isPl ? alternatePath : '#'} style={isPl ? "opacity: 0.5; color: var(--text); text-decoration: none;" : "font-weight: bold; pointer-events: none; color: var(--text); text-decoration: none;"}>EN</a>
+							<a href={enUrl} style={isPl ? "opacity: 0.5; color: var(--text); text-decoration: none;" : "font-weight: bold; pointer-events: none; color: var(--text); text-decoration: none;"}>EN</a>
 							<span style="opacity: 0.5; margin: 0 0.3rem;">|</span>
-							<a href={!isPl ? alternatePath : '#'} style={!isPl ? "opacity: 0.5; color: var(--text); text-decoration: none;" : "font-weight: bold; pointer-events: none; color: var(--text); text-decoration: none;"}>PL</a>
+							<a href={plUrl} style={!isPl ? "opacity: 0.5; color: var(--text); text-decoration: none;" : "font-weight: bold; pointer-events: none; color: var(--text); text-decoration: none;"}>PL</a>
 						</div>
 						<button id="theme-toggle" style="background: none; border: none; cursor: pointer; color: var(--text); padding: 0; display: flex; align-items: center;" aria-label="Toggle Theme">
 							<svg class="theme-icon-sun" width="24" height="24" viewBox="0 0 16 16" fill="currentColor">
