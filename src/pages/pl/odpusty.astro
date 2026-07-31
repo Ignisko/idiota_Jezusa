@@ -141,8 +141,12 @@ const title = "Odpusty";
 			];
 
 			const tbody = document.getElementById('calendar-body');
+			let hasToday = false;
+			const todayDateOnly = new Date(year, m, d);
 			
-			calendarEvents.sort((a, b) => a.date - b.date).forEach(event => {
+			calendarEvents.sort((a, b) => a.date - b.date);
+			
+			calendarEvents.forEach(event => {
 				const tr = document.createElement('tr');
 				tr.dataset.id = event.id;
 				let dateStr = formatDate(event.date);
@@ -159,12 +163,15 @@ const title = "Odpusty";
 								isSameDay(today, event.date);
 
 				if (isToday) {
+					hasToday = true;
 					tr.classList.add('active-today');
 					
 					const specialSection = document.getElementById('today-special');
 					const specialList = document.getElementById('today-list');
+					const specialTitle = specialSection.querySelector('h2');
 					if (specialSection.style.display === 'none') {
 						specialSection.style.display = 'block';
+						specialTitle.textContent = 'Specjalny odpust zupełny dostępny dzisiaj!';
 					}
 					const li = document.createElement('li');
 					li.innerHTML = `<strong>${event.name}</strong>: ${event.desc}`;
@@ -178,6 +185,23 @@ const title = "Odpusty";
 				`;
 				tbody.appendChild(tr);
 			});
+			
+			if (!hasToday) {
+				let nextEvent = calendarEvents.find(e => e.date > todayDateOnly);
+				if (!nextEvent) {
+					nextEvent = calendarEvents[0]; // Wrap around to Jan 1
+				}
+				
+				const specialSection = document.getElementById('today-special');
+				const specialList = document.getElementById('today-list');
+				const specialTitle = specialSection.querySelector('h2');
+				
+				specialTitle.textContent = 'Następny specjalny odpust zupełny:';
+				specialSection.style.display = 'block';
+				const li = document.createElement('li');
+				li.innerHTML = `<strong>${nextEvent.name}</strong>: ${nextEvent.desc}`;
+				specialList.appendChild(li);
+			}
 		}
 		
 		document.addEventListener('DOMContentLoaded', checkSpecials);
