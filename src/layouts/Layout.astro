@@ -51,7 +51,9 @@ const plUrl = basePath === '/' ? `${plDomain}/pl/` : `${plDomain}/pl${basePath}`
 					window.location.replace('https://www.idiotajezusa.pl' + window.location.pathname);
 				} else if (host.includes('idiotajezusa') && !isPl) {
 					// English page on Polish domain -> redirect to Polish directory
-					window.location.replace('https://www.idiotajezusa.pl/pl' + window.location.pathname);
+					if (!window.location.pathname.startsWith('/pl/') && window.location.pathname !== '/pl') {
+						window.location.replace('https://www.idiotajezusa.pl/pl' + window.location.pathname);
+					}
 				}
 			}
 
