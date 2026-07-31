@@ -1,5 +1,5 @@
 ---
-const { title, lang = 'en', hideNav = false, hideHeader = false } = Astro.props;
+const { title, lang = 'en', hideNav = false, hideHeader = false, enPath, plPath } = Astro.props;
 
 const isPl = lang === 'pl';
 const homeLink = isPl ? '/pl/' : '/';
@@ -26,8 +26,11 @@ if (basePath === '') basePath = '/';
 const enDomain = 'https://www.afoolforjesus.org';
 const plDomain = 'https://www.idiotajezusa.pl';
 
-const enUrl = basePath === '/' ? enDomain : `${enDomain}${basePath}`;
-const plUrl = basePath === '/' ? `${plDomain}/pl/` : `${plDomain}/pl${basePath}`;
+const finalEnPath = enPath !== undefined ? enPath : basePath;
+const finalPlPath = plPath !== undefined ? plPath : (basePath === '/' ? '/pl/' : `/pl${basePath}`);
+
+const enUrl = finalEnPath === '/' ? enDomain : `${enDomain}${finalEnPath}`;
+const plUrl = finalPlPath === '/pl/' ? `${plDomain}/pl/` : `${plDomain}${finalPlPath}`;
 ---
 <html lang={lang}>
 	<head>
