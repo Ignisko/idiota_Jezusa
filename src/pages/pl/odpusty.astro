@@ -11,6 +11,21 @@ const title = "Odpusty";
 			Tutaj znajdziesz listę standardowych odpustów oraz sprawdzisz, jakie specjalne odpusty są dostępne dzisiaj.
 		</p>
 
+		<section class="rules-section">
+			<h2>Warunki i zasady</h2>
+			<ul>
+				<li><strong>Aby uzyskać odpust zupełny</strong>, należy wykonać przypisane dzieło oraz spełnić następujące warunki: 
+					<ol>
+						<li>Stan łaski uświęcającej i całkowity brak przywiązania do jakiegokolwiek grzechu (nawet lekkiego).</li>
+						<li>Spowiedź sakramentalna (jedna spowiedź wystarcza dla wielu odpustów).</li>
+						<li>Przyjęcie Komunii Świętej (najlepiej w tym samym dniu).</li>
+						<li>Modlitwa w intencjach Ojca Świętego (np. <em>Ojcze nasz</em> i <em>Zdrowaś Maryjo</em>).</li>
+					</ol>
+				</li>
+				<li><strong>Dla dusz w czyśćcu:</strong> Każdy odpust (zupełny lub cząstkowy) można zyskać dla siebie albo ofiarować za zmarłych cierpiących w czyśćcu. <em>Nie można</em> ofiarować odpustu za inne osoby żyjące na ziemi.</li>
+			</ul>
+		</section>
+
 		<section id="today-special" class="highlight-section" style="display:none;">
 			<h2>Specjalny odpust zupełny dostępny dzisiaj!</h2>
 			<ul id="today-list"></ul>
@@ -26,9 +41,6 @@ const title = "Odpusty";
 					<li><strong>Odmówienie Różańca</strong> (5 dziesiątków) w kościele, publicznej kaplicy, w rodzinie lub wspólnocie zakonnej.</li>
 					<li><strong>Koronka do Miłosierdzia Bożego</strong> przed Najświętszym Sakramentem (w Polsce).</li>
 				</ul>
-				<p class="conditions">
-					* <em>Warunki uzyskania odpustu zupełnego</em>: Stan łaski uświęcającej, brak przywiązania do jakiegokolwiek grzechu, spowiedź sakramentalna, przyjęcie Komunii Świętej oraz modlitwa w intencjach Papieża.
-				</p>
 			</div>
 
 			<div class="col">
@@ -246,12 +258,23 @@ const title = "Odpusty";
 		:root[data-theme="dark"] .col {
 			background-color: rgba(255,255,255,0.02);
 		}
-		.conditions {
-			font-size: 0.9rem;
-			opacity: 0.8;
-			margin-top: 1rem;
-			border-top: 1px dashed var(--text);
-			padding-top: 1rem;
+		.rules-section {
+			background-color: rgba(0,0,0,0.03);
+			padding: 1.5rem;
+			border-left: 4px solid var(--title);
+			margin-bottom: 2rem;
+		}
+		:root[data-theme="dark"] .rules-section {
+			background-color: rgba(255,255,255,0.03);
+		}
+		.rules-section h2 {
+			margin-top: 0;
+			font-size: 1.8rem;
+			color: var(--title);
+		}
+		.rules-section ol {
+			margin-top: 0.5rem;
+			margin-bottom: 0.5rem;
 		}
 		ul {
 			list-style-type: square;

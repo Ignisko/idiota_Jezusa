@@ -11,6 +11,21 @@ const title = "Indulgences";
 			Here you can find a list of standard indulgences and discover which special ones are available today.
 		</p>
 
+		<section class="rules-section">
+			<h2>Conditions & rules</h2>
+			<ul>
+				<li><strong>To gain a Plenary Indulgence</strong>, you must perform the indulgenced act and fulfill these conditions: 
+					<ol>
+						<li>Be in a state of grace and have complete detachment from all sin (even venial).</li>
+						<li>Sacramental Confession (one confession suffices for several indulgences).</li>
+						<li>Receive Holy Communion (preferably on the same day).</li>
+						<li>Pray for the Pope's intentions (e.g., one Our Father and one Hail Mary).</li>
+					</ol>
+				</li>
+				<li><strong>For the Souls in Purgatory:</strong> Any indulgence (plenary or partial) can be applied to yourself or offered for the souls in Purgatory. You <em>cannot</em> apply an indulgence to other living persons on earth.</li>
+			</ul>
+		</section>
+
 		<section id="today-special" class="highlight-section" style="display:none;">
 			<h2>Special plenary indulgence available today!</h2>
 			<ul id="today-list"></ul>
@@ -26,9 +41,6 @@ const title = "Indulgences";
 					<li><strong>Recitation of the Marian Rosary</strong> (5 decades) in a church, public oratory, family, or religious community.</li>
 					<li><strong>Chaplet of Divine Mercy</strong> before the Blessed Sacrament (in Poland).</li>
 				</ul>
-				<p class="conditions">
-					* <em>Conditions for Plenary Indulgence</em>: Be in a state of grace, completely detached from all sin, go to sacramental confession, receive Holy Communion, and pray for the Pope's intentions.
-				</p>
 			</div>
 
 			<div class="col">
@@ -246,12 +258,23 @@ const title = "Indulgences";
 		:root[data-theme="dark"] .col {
 			background-color: rgba(255,255,255,0.02);
 		}
-		.conditions {
-			font-size: 0.9rem;
-			opacity: 0.8;
-			margin-top: 1rem;
-			border-top: 1px dashed var(--text);
-			padding-top: 1rem;
+		.rules-section {
+			background-color: rgba(0,0,0,0.03);
+			padding: 1.5rem;
+			border-left: 4px solid var(--title);
+			margin-bottom: 2rem;
+		}
+		:root[data-theme="dark"] .rules-section {
+			background-color: rgba(255,255,255,0.03);
+		}
+		.rules-section h2 {
+			margin-top: 0;
+			font-size: 1.8rem;
+			color: var(--title);
+		}
+		.rules-section ol {
+			margin-top: 0.5rem;
+			margin-bottom: 0.5rem;
 		}
 		ul {
 			list-style-type: square;
