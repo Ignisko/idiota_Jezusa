@@ -52,23 +52,17 @@ const title = "Odpusty";
 
 		<section class="calendar">
 			<h2 style="margin-top:0;">Kalendarz Specjalnych Odpustów Zupełnych</h2>
-			<ul class="calendar-list">
-				<li data-id="jan1"><strong>1 stycznia</strong>: Publiczne odmówienie hymnu <em>Veni Creator</em>.</li>
-				<li data-id="lent-friday"><strong>Piątki Wielkiego Postu <span class="dynamic-date" data-key="lent"></span></strong>: Odmówienie modlitwy <em>"Oto ja"</em> po Komunii przed wizerunkiem Ukrzyżowanego.</li>
-				<li data-id="lent-weekly"><strong>Raz w tygodniu w Wielkim Poście <span class="dynamic-date" data-key="lent-weekly"></span></strong>: Udział w <em>Gorzkich Żalach</em> (w Polsce).</li>
-				<li data-id="holy-thursday"><strong>Wielki Czwartek <span class="dynamic-date" data-key="holy-thursday"></span></strong>: Uroczyste odmówienie <em>Przed tak wielkim Sakramentem</em>.</li>
-				<li data-id="good-friday"><strong>Wielki Piątek <span class="dynamic-date" data-key="good-friday"></span></strong>: Ucałowanie i adoracja Krzyża w trakcie liturgii.</li>
-				<li data-id="easter-vigil"><strong>Wigilia Paschalna <span class="dynamic-date" data-key="easter-vigil"></span></strong>: Odnowienie przyrzeczeń chrzcielnych w trakcie liturgii.</li>
-				<li data-id="pentecost"><strong>Zesłanie Ducha Świętego <span class="dynamic-date" data-key="pentecost"></span></strong>: Publiczne odmówienie hymnu <em>Veni Creator</em>.</li>
-				<li data-id="corpus-christi"><strong>Boże Ciało <span class="dynamic-date" data-key="corpus-christi"></span></strong>: Udział w procesji eucharystycznej.</li>
-				<li data-id="sacred-heart"><strong>Uroczystość Najświętszego Serca Pana Jezusa <span class="dynamic-date" data-key="sacred-heart"></span></strong>: Publiczne odmówienie aktu wynagrodzenia (<em>O Jezu Najsłodszy</em>).</li>
-				<li data-id="peter-paul"><strong>29 czerwca (Św. Piotra i Pawła)</strong>: Użycie przedmiotu pobłogosławionego przez Papieża lub biskupa i odmówienie Wyznania Wiary.</li>
-				<li data-id="portiuncula"><strong>2 sierpnia (Porcjunkuli)</strong>: Nawiedzenie kościoła parafialnego lub franciszkańskiego i odmówienie <em>Ojcze nasz</em> i <em>Wierzę w Boga</em>.</li>
-				<li data-id="nov1to8"><strong>1-8 listopada</strong>: Nawiedzenie cmentarza i modlitwa za zmarłych (tylko za dusze w czyśćcu).</li>
-				<li data-id="nov2"><strong>2 listopada (Dzień Zaduszny)</strong>: Nawiedzenie kościoła lub kaplicy i odmówienie <em>Ojcze nasz</em> i <em>Wierzę w Boga</em> (tylko za dusze w czyśćcu).</li>
-				<li data-id="christ-king"><strong>Uroczystość Chrystusa Króla <span class="dynamic-date" data-key="christ-king"></span></strong>: Odmówienie aktu oddania rodzaju ludzkiego.</li>
-				<li data-id="dec31"><strong>31 grudnia</strong>: Publiczne odśpiewanie hymnu <em>Ciebie Boga wysławiamy (Te Deum)</em>.</li>
-			</ul>
+			<table class="calendar-table">
+				<thead>
+					<tr>
+						<th>Data</th>
+						<th>Okazja</th>
+						<th>Czynność</th>
+					</tr>
+				</thead>
+				<tbody id="calendar-body">
+				</tbody>
+			</table>
 		</section>
 	</div>
 
@@ -124,58 +118,66 @@ const title = "Odpusty";
 			
 			const isLent = today >= ashWed && today < holyThursday;
 			
-			const specials = [];
+			const formatDate = (date) => date.toLocaleDateString('pl-PL', { month: 'long', day: 'numeric', year: 'numeric' });
+			const formatDateShort = (date) => date.toLocaleDateString('pl-PL', { month: 'long', day: 'numeric' });
 
-			if (m === 0 && d === 1) specials.push({ id: 'jan1', text: "1 stycznia: Publiczne odmówienie hymnu Veni Creator" });
-			if (m === 11 && d === 31) specials.push({ id: 'dec31', text: "31 grudnia: Publiczne odśpiewanie Ciebie Boga wysławiamy (Te Deum)" });
-			if (m === 5 && d === 29) specials.push({ id: 'peter-paul', text: "29 czerwca (Św. Piotra i Pawła): Użycie poświęconego przedmiotu i odmówienie Wyznania Wiary" });
-			if (m === 7 && d === 2) specials.push({ id: 'portiuncula', text: "2 sierpnia (Porcjunkuli): Nawiedzenie kościoła i odmówienie Ojcze nasz i Wierzę w Boga" });
-			if (m === 10 && d >= 1 && d <= 8) specials.push({ id: 'nov1to8', text: "1-8 listopada: Nawiedzenie cmentarza i modlitwa za zmarłych (za dusze w czyśćcu)" });
-			if (m === 10 && d === 2) specials.push({ id: 'nov2', text: "2 listopada (Zaduszki): Nawiedzenie kościoła/kaplicy i modlitwa za zmarłych" });
+			const calendarEvents = [
+				{ id: 'jan1', date: new Date(year, 0, 1), name: '1 stycznia (Nowy Rok)', desc: 'Publiczne odmówienie hymnu <em>Veni Creator</em>.' },
+				{ id: 'lent-friday', date: ashWed, name: 'Piątki Wielkiego Postu', desc: 'Odmówienie modlitwy <em>"Oto ja"</em> po Komunii przed wizerunkiem Ukrzyżowanego.' },
+				{ id: 'lent-weekly', date: ashWed, name: 'Raz w tygodniu w Wielkim Poście', desc: 'Udział w <em>Gorzkich Żalach</em> (w Polsce).' },
+				{ id: 'holy-thursday', date: holyThursday, name: 'Wielki Czwartek', desc: 'Uroczyste odmówienie <em>Przed tak wielkim Sakramentem</em>.' },
+				{ id: 'good-friday', date: goodFriday, name: 'Wielki Piątek', desc: 'Ucałowanie i adoracja Krzyża w trakcie liturgii.' },
+				{ id: 'easter-vigil', date: easterVigil, name: 'Wigilia Paschalna', desc: 'Odnowienie przyrzeczeń chrzcielnych w trakcie liturgii.' },
+				{ id: 'pentecost', date: pentecost, name: 'Zesłanie Ducha Świętego', desc: 'Publiczne odmówienie hymnu <em>Veni Creator</em>.' },
+				{ id: 'corpus-christi', date: corpusChristi, name: 'Boże Ciało', desc: 'Udział w procesji eucharystycznej.' },
+				{ id: 'sacred-heart', date: sacredHeart, name: 'Uroczystość Najświętszego Serca Pana Jezusa', desc: 'Publiczne odmówienie aktu wynagrodzenia (<em>O Jezu Najsłodszy</em>).' },
+				{ id: 'peter-paul', date: new Date(year, 5, 29), name: '29 czerwca (Św. Piotra i Pawła)', desc: 'Użycie przedmiotu pobłogosławionego przez Papieża lub biskupa i odmówienie Wyznania Wiary.' },
+				{ id: 'ignatius', date: new Date(year, 6, 31), name: '31 lipca (Św. Ignacego z Loyoli)', desc: 'Nawiedzenie kościoła lub kaplicy jezuickiej i odmówienie <em>Ojcze nasz</em> i <em>Wierzę w Boga</em>.' },
+				{ id: 'portiuncula', date: new Date(year, 7, 2), name: '2 sierpnia (Porcjunkuli)', desc: 'Nawiedzenie kościoła parafialnego lub franciszkańskiego i odmówienie <em>Ojcze nasz</em> i <em>Wierzę w Boga</em>.' },
+				{ id: 'nov1to8', date: new Date(year, 10, 1), name: '1-8 listopada', desc: 'Nawiedzenie cmentarza i modlitwa za zmarłych (tylko za dusze w czyśćcu).' },
+				{ id: 'nov2', date: new Date(year, 10, 2), name: '2 listopada (Dzień Zaduszny)', desc: 'Nawiedzenie kościoła lub kaplicy i odmówienie <em>Ojcze nasz</em> i <em>Wierzę w Boga</em> (tylko za dusze w czyśćcu).' },
+				{ id: 'christ-king', date: christTheKing, name: 'Uroczystość Chrystusa Króla', desc: 'Odmówienie aktu oddania rodzaju ludzkiego.' },
+				{ id: 'dec31', date: new Date(year, 11, 31), name: '31 grudnia', desc: 'Publiczne odśpiewanie hymnu <em>Ciebie Boga wysławiamy (Te Deum)</em>.' }
+			];
 
-			if (isLent && dayOfWeek === 5) specials.push({ id: 'lent-friday', text: "Piątek Wielkiego Postu: Odmówienie modlitwy 'Oto ja' po Komunii przed krzyżem" });
-			if (isLent) specials.push({ id: 'lent-weekly', text: "Wielki Post: Udział w Gorzkich Żalach raz w tygodniu" });
-
-			if (isSameDay(today, holyThursday)) specials.push({ id: 'holy-thursday', text: "Wielki Czwartek: Odmówienie Przed tak wielkim Sakramentem" });
-			if (isSameDay(today, goodFriday)) specials.push({ id: 'good-friday', text: "Wielki Piątek: Ucałowanie i Adoracja Krzyża" });
-			if (isSameDay(today, easterVigil)) specials.push({ id: 'easter-vigil', text: "Wigilia Paschalna: Odnowienie przyrzeczeń chrzcielnych" });
-			if (isSameDay(today, pentecost)) specials.push({ id: 'pentecost', text: "Zesłanie Ducha Świętego: Publiczne odmówienie Veni Creator" });
-			if (isSameDay(today, corpusChristi)) specials.push({ id: 'corpus-christi', text: "Boże Ciało: Udział w procesji eucharystycznej" });
-			if (isSameDay(today, sacredHeart)) specials.push({ id: 'sacred-heart', text: "Najświętszego Serca Pana Jezusa: Odmówienie 'O Jezu Najsłodszy'" });
-			if (isSameDay(today, christTheKing)) specials.push({ id: 'christ-king', text: "Chrystusa Króla: Akt oddania rodzaju ludzkiego" });
-
-			if (specials.length > 0) {
-				const specialSection = document.getElementById('today-special');
-				const specialList = document.getElementById('today-list');
-				specialSection.style.display = 'block';
+			const tbody = document.getElementById('calendar-body');
+			
+			calendarEvents.sort((a, b) => a.date - b.date).forEach(event => {
+				const tr = document.createElement('tr');
+				tr.dataset.id = event.id;
+				let dateStr = formatDate(event.date);
 				
-				specials.forEach(s => {
-					const li = document.createElement('li');
-					li.textContent = s.text;
-					specialList.appendChild(li);
+				if (event.id === 'lent-friday' || event.id === 'lent-weekly') {
+					dateStr = `${formatDateShort(ashWed)} - ${formatDate(holyThursday)}`;
+				} else if (event.id === 'nov1to8') {
+					dateStr = `${formatDateShort(new Date(year, 10, 1))} - ${formatDate(new Date(year, 10, 8))}`;
+				}
 
-					// highlight in calendar
-					const calItem = document.querySelector(`li[data-id="${s.id}"]`);
-					if (calItem) calItem.classList.add('active-today');
-				});
-			}
-			
-			// Format and display dynamic dates
-			const formatDate = (date) => date.toLocaleDateString('pl-PL', { month: 'long', day: 'numeric' });
-			const updateDate = (key, text) => {
-				const el = document.querySelector(`[data-key="${key}"]`);
-				if (el) el.textContent = `(${text})`;
-			};
-			
-			updateDate('lent', `${formatDate(ashWed)} - ${formatDate(holyThursday)}`);
-			updateDate('lent-weekly', `${formatDate(ashWed)} - ${formatDate(holyThursday)}`);
-			updateDate('holy-thursday', formatDate(holyThursday));
-			updateDate('good-friday', formatDate(goodFriday));
-			updateDate('easter-vigil', formatDate(easterVigil));
-			updateDate('pentecost', formatDate(pentecost));
-			updateDate('corpus-christi', formatDate(corpusChristi));
-			updateDate('sacred-heart', formatDate(sacredHeart));
-			updateDate('christ-king', formatDate(christTheKing));
+				const isToday = event.id === 'nov1to8' ? (m === 10 && d >= 1 && d <= 8) : 
+								event.id === 'lent-friday' ? (isLent && dayOfWeek === 5) : 
+								event.id === 'lent-weekly' ? isLent :
+								isSameDay(today, event.date);
+
+				if (isToday) {
+					tr.classList.add('active-today');
+					
+					const specialSection = document.getElementById('today-special');
+					const specialList = document.getElementById('today-list');
+					if (specialSection.style.display === 'none') {
+						specialSection.style.display = 'block';
+					}
+					const li = document.createElement('li');
+					li.innerHTML = `<strong>${event.name}</strong>: ${event.desc}`;
+					specialList.appendChild(li);
+				}
+
+				tr.innerHTML = `
+					<td class="date-cell"><strong>${dateStr}</strong></td>
+					<td><strong>${event.name}</strong></td>
+					<td>${event.desc}</td>
+				`;
+				tbody.appendChild(tr);
+			});
 		}
 		
 		document.addEventListener('DOMContentLoaded', checkSpecials);
@@ -238,15 +240,40 @@ const title = "Odpusty";
 			border: 2px solid var(--text);
 			padding: 1.5rem;
 			box-shadow: 4px 4px 0 var(--text);
+			overflow-x: auto;
+		}
+		.calendar-table {
+			width: 100%;
+			border-collapse: collapse;
+			margin-top: 1rem;
+		}
+		.calendar-table th, .calendar-table td {
+			border: 1px solid var(--text);
+			padding: 0.8rem;
+			text-align: left;
+			vertical-align: top;
+		}
+		.calendar-table th {
+			background-color: rgba(0,0,0,0.05);
+			font-family: 'VT323', monospace;
+			font-size: 1.4rem;
+		}
+		:root[data-theme="dark"] .calendar-table th {
+			background-color: rgba(255,255,255,0.05);
+		}
+		.date-cell {
+			white-space: nowrap;
+			color: var(--accent);
 		}
 		.active-today {
-			font-weight: bold;
 			color: var(--bg);
 			background-color: var(--link);
-			padding: 0.2rem 0.5rem;
-			border-left: 4px solid var(--accent);
-			margin-left: -0.7rem;
-			border-radius: 2px;
+		}
+		.active-today td {
+			border-color: var(--bg);
+		}
+		.active-today .date-cell {
+			color: var(--bg);
 		}
 		@keyframes glow {
 			from { box-shadow: 4px 4px 0 var(--text); }

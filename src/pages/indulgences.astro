@@ -52,23 +52,17 @@ const title = "Indulgences";
 
 		<section class="calendar">
 			<h2 style="margin-top:0;">Special Plenary Indulgences Calendar</h2>
-			<ul class="calendar-list">
-				<li data-id="jan1"><strong>Jan 1</strong>: Recite <em>Veni Creator</em> (O Stworzycielu Duchu, przyjdź) publicly.</li>
-				<li data-id="lent-friday"><strong>Fridays of Lent <span class="dynamic-date" data-key="lent"></span></strong>: Recite <em>Oto ja</em> (Look down upon me, good and gentle Jesus) after Communion before a crucifix.</li>
-				<li data-id="lent-weekly"><strong>Once a week in Lent <span class="dynamic-date" data-key="lent-weekly"></span></strong>: Participate in <em>Gorzkie Żale</em> (in Poland).</li>
-				<li data-id="holy-thursday"><strong>Holy Thursday <span class="dynamic-date" data-key="holy-thursday"></span></strong>: Recite <em>Przed tak wielkim Sakramentem</em> (Tantum Ergo) during the transfer of the Blessed Sacrament.</li>
-				<li data-id="good-friday"><strong>Good Friday <span class="dynamic-date" data-key="good-friday"></span></strong>: Veneration of the Cross during the solemn liturgy.</li>
-				<li data-id="easter-vigil"><strong>Easter Vigil <span class="dynamic-date" data-key="easter-vigil"></span></strong>: Renewal of Baptismal Promises during the liturgy.</li>
-				<li data-id="pentecost"><strong>Pentecost <span class="dynamic-date" data-key="pentecost"></span></strong>: Recite <em>Veni Creator</em> (O Stworzycielu Duchu, przyjdź) publicly.</li>
-				<li data-id="corpus-christi"><strong>Corpus Christi <span class="dynamic-date" data-key="corpus-christi"></span></strong>: Participate in the Eucharistic procession.</li>
-				<li data-id="sacred-heart"><strong>Solemnity of the Sacred Heart <span class="dynamic-date" data-key="sacred-heart"></span></strong>: Act of Reparation (<em>O Jezu Najsłodszy</em>) publicly.</li>
-				<li data-id="peter-paul"><strong>June 29 (Sts. Peter & Paul)</strong>: Use a religious article blessed by the Pope or a bishop, and recite the Creed (<em>Wierzę w Boga</em>).</li>
-				<li data-id="portiuncula"><strong>Aug 2 (Portiuncula)</strong>: Visit a parish/Franciscan church and recite Our Father (<em>Ojcze nasz</em>) and Creed (<em>Wierzę w Boga</em>).</li>
-				<li data-id="nov1to8"><strong>Nov 1-8</strong>: Visit a cemetery and pray for the dead (applicable only to the souls in purgatory).</li>
-				<li data-id="nov2"><strong>Nov 2 (All Souls)</strong>: Visit a church or oratory and recite Our Father (<em>Ojcze nasz</em>) and Creed (<em>Wierzę w Boga</em>) (only for souls in purgatory).</li>
-				<li data-id="christ-king"><strong>Solemnity of Christ the King <span class="dynamic-date" data-key="christ-king"></span></strong>: Act of Dedication of the Human Race to Jesus Christ.</li>
-				<li data-id="dec31"><strong>Dec 31</strong>: Recite <em>Ciebie Boga wysławiamy</em> (Te Deum) publicly to thank God for the year.</li>
-			</ul>
+			<table class="calendar-table">
+				<thead>
+					<tr>
+						<th>Date</th>
+						<th>Occasion</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody id="calendar-body">
+				</tbody>
+			</table>
 		</section>
 	</div>
 
@@ -124,58 +118,66 @@ const title = "Indulgences";
 			
 			const isLent = today >= ashWed && today < holyThursday;
 			
-			const specials = [];
+			const formatDate = (date) => date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+			const formatDateShort = (date) => date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
 
-			if (m === 0 && d === 1) specials.push({ id: 'jan1', text: "Jan 1: Recite Veni Creator (O Stworzycielu Duchu, przyjdź) publicly" });
-			if (m === 11 && d === 31) specials.push({ id: 'dec31', text: "Dec 31: Recite Ciebie Boga wysławiamy (Te Deum) publicly" });
-			if (m === 5 && d === 29) specials.push({ id: 'peter-paul', text: "Sts Peter & Paul: Use blessed article and recite Creed (Wierzę w Boga)" });
-			if (m === 7 && d === 2) specials.push({ id: 'portiuncula', text: "Portiuncula: Visit a parish/Franciscan church and recite Ojcze nasz and Wierzę w Boga" });
-			if (m === 10 && d >= 1 && d <= 8) specials.push({ id: 'nov1to8', text: "Nov 1-8: Visit a cemetery and pray for the dead (for souls in purgatory)" });
-			if (m === 10 && d === 2) specials.push({ id: 'nov2', text: "All Souls: Visit a church/oratory and recite Ojcze nasz and Wierzę w Boga (for souls in purgatory)" });
+			const calendarEvents = [
+				{ id: 'jan1', date: new Date(year, 0, 1), name: 'Jan 1', desc: 'Recite <em>Veni Creator</em> (O Stworzycielu Duchu, przyjdź) publicly.' },
+				{ id: 'lent-friday', date: ashWed, name: 'Fridays of Lent', desc: 'Recite <em>Oto ja</em> (Look down upon me, good and gentle Jesus) after Communion before a crucifix.' },
+				{ id: 'lent-weekly', date: ashWed, name: 'Once a week in Lent', desc: 'Participate in <em>Gorzkie Żale</em> (in Poland).' },
+				{ id: 'holy-thursday', date: holyThursday, name: 'Holy Thursday', desc: 'Recite <em>Przed tak wielkim Sakramentem</em> (Tantum Ergo) during the transfer of the Blessed Sacrament.' },
+				{ id: 'good-friday', date: goodFriday, name: 'Good Friday', desc: 'Veneration of the Cross during the solemn liturgy.' },
+				{ id: 'easter-vigil', date: easterVigil, name: 'Easter Vigil', desc: 'Renewal of Baptismal Promises during the liturgy.' },
+				{ id: 'pentecost', date: pentecost, name: 'Pentecost', desc: 'Recite <em>Veni Creator</em> (O Stworzycielu Duchu, przyjdź) publicly.' },
+				{ id: 'corpus-christi', date: corpusChristi, name: 'Corpus Christi', desc: 'Participate in the Eucharistic procession.' },
+				{ id: 'sacred-heart', date: sacredHeart, name: 'Solemnity of the Sacred Heart', desc: 'Act of Reparation (<em>O Jezu Najsłodszy</em>) publicly.' },
+				{ id: 'peter-paul', date: new Date(year, 5, 29), name: 'Sts. Peter & Paul', desc: 'Use a religious article blessed by the Pope or a bishop, and recite the Creed (<em>Wierzę w Boga</em>).' },
+				{ id: 'ignatius', date: new Date(year, 6, 31), name: 'July 31 (St. Ignatius of Loyola)', desc: 'Visit a Jesuit church or oratory and recite Our Father (<em>Ojcze nasz</em>) and Creed (<em>Wierzę w Boga</em>).' },
+				{ id: 'portiuncula', date: new Date(year, 7, 2), name: 'Portiuncula', desc: 'Visit a parish/Franciscan church and recite Our Father (<em>Ojcze nasz</em>) and Creed (<em>Wierzę w Boga</em>).' },
+				{ id: 'nov1to8', date: new Date(year, 10, 1), name: 'Nov 1-8', desc: 'Visit a cemetery and pray for the dead (applicable only to the souls in purgatory).' },
+				{ id: 'nov2', date: new Date(year, 10, 2), name: 'All Souls', desc: 'Visit a church or oratory and recite Our Father (<em>Ojcze nasz</em>) and Creed (<em>Wierzę w Boga</em>) (only for souls in purgatory).' },
+				{ id: 'christ-king', date: christTheKing, name: 'Solemnity of Christ the King', desc: 'Act of Dedication of the Human Race to Jesus Christ.' },
+				{ id: 'dec31', date: new Date(year, 11, 31), name: 'Dec 31', desc: 'Recite <em>Ciebie Boga wysławiamy</em> (Te Deum) publicly to thank God for the year.' }
+			];
 
-			if (isLent && dayOfWeek === 5) specials.push({ id: 'lent-friday', text: "Friday of Lent: Recite 'Oto ja' after Communion before a crucifix" });
-			if (isLent) specials.push({ id: 'lent-weekly', text: "Lent: Participate in Gorzkie Żale once a week" });
-
-			if (isSameDay(today, holyThursday)) specials.push({ id: 'holy-thursday', text: "Holy Thursday: Recite Przed tak wielkim Sakramentem (Tantum Ergo) during transfer of Blessed Sacrament" });
-			if (isSameDay(today, goodFriday)) specials.push({ id: 'good-friday', text: "Good Friday: Veneration of the Cross during liturgy" });
-			if (isSameDay(today, easterVigil)) specials.push({ id: 'easter-vigil', text: "Easter Vigil: Renewal of Baptismal Promises during liturgy" });
-			if (isSameDay(today, pentecost)) specials.push({ id: 'pentecost', text: "Pentecost: Recite Veni Creator (O Stworzycielu Duchu, przyjdź) publicly" });
-			if (isSameDay(today, corpusChristi)) specials.push({ id: 'corpus-christi', text: "Corpus Christi: Participate in Eucharistic procession" });
-			if (isSameDay(today, sacredHeart)) specials.push({ id: 'sacred-heart', text: "Sacred Heart: Act of Reparation (O Jezu Najsłodszy) publicly" });
-			if (isSameDay(today, christTheKing)) specials.push({ id: 'christ-king', text: "Christ the King: Act of Dedication of the Human Race to Jesus Christ" });
-
-			if (specials.length > 0) {
-				const specialSection = document.getElementById('today-special');
-				const specialList = document.getElementById('today-list');
-				specialSection.style.display = 'block';
+			const tbody = document.getElementById('calendar-body');
+			
+			calendarEvents.sort((a, b) => a.date - b.date).forEach(event => {
+				const tr = document.createElement('tr');
+				tr.dataset.id = event.id;
+				let dateStr = formatDate(event.date);
 				
-				specials.forEach(s => {
-					const li = document.createElement('li');
-					li.textContent = s.text;
-					specialList.appendChild(li);
+				if (event.id === 'lent-friday' || event.id === 'lent-weekly') {
+					dateStr = `${formatDateShort(ashWed)} - ${formatDate(holyThursday)}`;
+				} else if (event.id === 'nov1to8') {
+					dateStr = `${formatDateShort(new Date(year, 10, 1))} - ${formatDate(new Date(year, 10, 8))}`;
+				}
 
-					// highlight in calendar
-					const calItem = document.querySelector(`li[data-id="${s.id}"]`);
-					if (calItem) calItem.classList.add('active-today');
-				});
-			}
-			
-			// Format and display dynamic dates
-			const formatDate = (date) => date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-			const updateDate = (key, text) => {
-				const el = document.querySelector(`[data-key="${key}"]`);
-				if (el) el.textContent = `(${text})`;
-			};
-			
-			updateDate('lent', `${formatDate(ashWed)} - ${formatDate(holyThursday)}`);
-			updateDate('lent-weekly', `${formatDate(ashWed)} - ${formatDate(holyThursday)}`);
-			updateDate('holy-thursday', formatDate(holyThursday));
-			updateDate('good-friday', formatDate(goodFriday));
-			updateDate('easter-vigil', formatDate(easterVigil));
-			updateDate('pentecost', formatDate(pentecost));
-			updateDate('corpus-christi', formatDate(corpusChristi));
-			updateDate('sacred-heart', formatDate(sacredHeart));
-			updateDate('christ-king', formatDate(christTheKing));
+				const isToday = event.id === 'nov1to8' ? (m === 10 && d >= 1 && d <= 8) : 
+								event.id === 'lent-friday' ? (isLent && dayOfWeek === 5) : 
+								event.id === 'lent-weekly' ? isLent :
+								isSameDay(today, event.date);
+
+				if (isToday) {
+					tr.classList.add('active-today');
+					
+					const specialSection = document.getElementById('today-special');
+					const specialList = document.getElementById('today-list');
+					if (specialSection.style.display === 'none') {
+						specialSection.style.display = 'block';
+					}
+					const li = document.createElement('li');
+					li.innerHTML = `<strong>${event.name}</strong>: ${event.desc}`;
+					specialList.appendChild(li);
+				}
+
+				tr.innerHTML = `
+					<td class="date-cell"><strong>${dateStr}</strong></td>
+					<td><strong>${event.name}</strong></td>
+					<td>${event.desc}</td>
+				`;
+				tbody.appendChild(tr);
+			});
 		}
 		
 		document.addEventListener('DOMContentLoaded', checkSpecials);
@@ -238,15 +240,40 @@ const title = "Indulgences";
 			border: 2px solid var(--text);
 			padding: 1.5rem;
 			box-shadow: 4px 4px 0 var(--text);
+			overflow-x: auto;
+		}
+		.calendar-table {
+			width: 100%;
+			border-collapse: collapse;
+			margin-top: 1rem;
+		}
+		.calendar-table th, .calendar-table td {
+			border: 1px solid var(--text);
+			padding: 0.8rem;
+			text-align: left;
+			vertical-align: top;
+		}
+		.calendar-table th {
+			background-color: rgba(0,0,0,0.05);
+			font-family: 'VT323', monospace;
+			font-size: 1.4rem;
+		}
+		:root[data-theme="dark"] .calendar-table th {
+			background-color: rgba(255,255,255,0.05);
+		}
+		.date-cell {
+			white-space: nowrap;
+			color: var(--accent);
 		}
 		.active-today {
-			font-weight: bold;
 			color: var(--bg);
 			background-color: var(--link);
-			padding: 0.2rem 0.5rem;
-			border-left: 4px solid var(--accent);
-			margin-left: -0.7rem;
-			border-radius: 2px;
+		}
+		.active-today td {
+			border-color: var(--bg);
+		}
+		.active-today .date-cell {
+			color: var(--bg);
 		}
 		@keyframes glow {
 			from { box-shadow: 4px 4px 0 var(--text); }
