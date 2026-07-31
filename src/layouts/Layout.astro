@@ -3,8 +3,12 @@ const { title, lang = 'en', hideNav = false, hideHeader = false } = Astro.props;
 
 const isPl = lang === 'pl';
 const homeLink = isPl ? '/pl/' : '/';
+const projectsLink = isPl ? '/pl/projects' : '/projects';
+const articlesLink = isPl ? '/pl/articles' : '/articles';
 const aboutLink = isPl ? '/pl/about' : '/about';
 const homeText = isPl ? 'Strona główna' : 'Home';
+const projectsText = isPl ? 'Projekty' : 'Projects';
+const articlesText = isPl ? 'Artykuły' : 'Articles';
 const aboutText = isPl ? 'O mnie' : 'About';
 const siteTitle = isPl ? 'Idiota Jezusa' : 'A fool for Jesus';
 
@@ -323,6 +327,8 @@ const plUrl = basePath === '/' ? `${plDomain}/pl/` : `${plDomain}/pl${basePath}`
 							{!hideNav && (
 								<nav>
 									<a href={homeLink}>{homeText}</a>
+									<a href={projectsLink}>{projectsText}</a>
+									<a href={articlesLink}>{articlesText}</a>
 									<a href={aboutLink}>{aboutText}</a>
 								</nav>
 							)}

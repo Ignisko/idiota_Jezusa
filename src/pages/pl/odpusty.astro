@@ -1,0 +1,256 @@
+---
+import Layout from '../../layouts/Layout.astro';
+const title = "Odpusty";
+---
+
+<Layout title={title} lang="pl">
+	<div class="indulgences-container">
+		<h1>Odpusty Zupełne i Cząstkowe</h1>
+		<p class="intro">
+			Odpust jest to darowanie przed Bogiem kary doczesnej za grzechy, zgładzone już co do winy. 
+			Tutaj znajdziesz listę standardowych odpustów oraz sprawdzisz, jakie specjalne odpusty są dostępne dzisiaj.
+		</p>
+
+		<section id="today-special" class="highlight-section" style="display:none;">
+			<h2>Specjalny Odpust Zupełny Dostępny Dzisiaj!</h2>
+			<ul id="today-list"></ul>
+		</section>
+
+		<section class="columns">
+			<div class="col">
+				<h2 style="margin-top:0;">Standardowe Odpusty Zupełne (Każdego Dnia)</h2>
+				<ul>
+					<li><strong>Adoracja Najświętszego Sakramentu</strong> przez co najmniej pół godziny.</li>
+					<li><strong>Pobożne czytanie Pisma Świętego</strong> przez co najmniej pół godziny.</li>
+					<li><strong>Odprawienie Drogi Krzyżowej</strong> (przechodząc od stacji do stacji).</li>
+					<li><strong>Odmówienie Różańca</strong> (5 dziesiątków) w kościele, publicznej kaplicy, w rodzinie lub wspólnocie zakonnej.</li>
+					<li><strong>Koronka do Miłosierdzia Bożego</strong> przed Najświętszym Sakramentem (w Polsce).</li>
+				</ul>
+				<p class="conditions">
+					* <em>Warunki uzyskania odpustu zupełnego</em>: Stan łaski uświęcającej, brak przywiązania do jakiegokolwiek grzechu, spowiedź sakramentalna, przyjęcie Komunii Świętej oraz modlitwa w intencjach Papieża.
+				</p>
+			</div>
+
+			<div class="col">
+				<h2 style="margin-top:0;">Odpusty Cząstkowe (Każdego Dnia)</h2>
+				<ul>
+					<li>Nauczanie lub uczenie się prawd wiary katolickiej.</li>
+					<li>Nawiedzenie Najświętszego Sakramentu w celu adoracji.</li>
+					<li>Odmówienie kantyku <em>Magnificat</em>.</li>
+					<li>Odmówienie <em>Anioł Pański</em> lub <em>Regina Caeli</em>.</li>
+					<li>Odmówienie modlitwy <em>Pomnij o Najświętsza Panno Maryjo</em> lub <em>Witaj Królowo</em>.</li>
+					<li>Odmówienie <em>Pod Twoją obronę</em>.</li>
+					<li>Wezwanie swojego Anioła Stróża (np. <em>Aniele Boży</em>).</li>
+					<li>Odmówienie zatwierdzonej Litanii (np. do Najświętszego Serca Pana Jezusa).</li>
+					<li>Odnowienie przyrzeczeń chrzcielnych.</li>
+					<li>Pobożne używanie poświęconego przedmiotu kultu religijnego.</li>
+					<li>Słuchanie Słowa Bożego (np. kazania).</li>
+					<li>Rachunek sumienia i wzbudzenie aktu żalu.</li>
+				</ul>
+			</div>
+		</section>
+
+		<section class="calendar">
+			<h2 style="margin-top:0;">Kalendarz Specjalnych Odpustów Zupełnych</h2>
+			<ul class="calendar-list">
+				<li data-id="jan1"><strong>1 stycznia</strong>: Publiczne odmówienie hymnu <em>Veni Creator</em>.</li>
+				<li data-id="lent-friday"><strong>Piątki Wielkiego Postu <span class="dynamic-date" data-key="lent"></span></strong>: Odmówienie modlitwy <em>"Oto ja"</em> po Komunii przed wizerunkiem Ukrzyżowanego.</li>
+				<li data-id="lent-weekly"><strong>Raz w tygodniu w Wielkim Poście <span class="dynamic-date" data-key="lent-weekly"></span></strong>: Udział w <em>Gorzkich Żalach</em> (w Polsce).</li>
+				<li data-id="holy-thursday"><strong>Wielki Czwartek <span class="dynamic-date" data-key="holy-thursday"></span></strong>: Uroczyste odmówienie <em>Przed tak wielkim Sakramentem</em>.</li>
+				<li data-id="good-friday"><strong>Wielki Piątek <span class="dynamic-date" data-key="good-friday"></span></strong>: Ucałowanie i adoracja Krzyża w trakcie liturgii.</li>
+				<li data-id="easter-vigil"><strong>Wigilia Paschalna <span class="dynamic-date" data-key="easter-vigil"></span></strong>: Odnowienie przyrzeczeń chrzcielnych w trakcie liturgii.</li>
+				<li data-id="pentecost"><strong>Zesłanie Ducha Świętego <span class="dynamic-date" data-key="pentecost"></span></strong>: Publiczne odmówienie hymnu <em>Veni Creator</em>.</li>
+				<li data-id="corpus-christi"><strong>Boże Ciało <span class="dynamic-date" data-key="corpus-christi"></span></strong>: Udział w procesji eucharystycznej.</li>
+				<li data-id="sacred-heart"><strong>Uroczystość Najświętszego Serca Pana Jezusa <span class="dynamic-date" data-key="sacred-heart"></span></strong>: Publiczne odmówienie aktu wynagrodzenia (<em>O Jezu Najsłodszy</em>).</li>
+				<li data-id="peter-paul"><strong>29 czerwca (Św. Piotra i Pawła)</strong>: Użycie przedmiotu pobłogosławionego przez Papieża lub biskupa i odmówienie Wyznania Wiary.</li>
+				<li data-id="portiuncula"><strong>2 sierpnia (Porcjunkuli)</strong>: Nawiedzenie kościoła parafialnego lub franciszkańskiego i odmówienie <em>Ojcze nasz</em> i <em>Wierzę w Boga</em>.</li>
+				<li data-id="nov1to8"><strong>1-8 listopada</strong>: Nawiedzenie cmentarza i modlitwa za zmarłych (tylko za dusze w czyśćcu).</li>
+				<li data-id="nov2"><strong>2 listopada (Dzień Zaduszny)</strong>: Nawiedzenie kościoła lub kaplicy i odmówienie <em>Ojcze nasz</em> i <em>Wierzę w Boga</em> (tylko za dusze w czyśćcu).</li>
+				<li data-id="christ-king"><strong>Uroczystość Chrystusa Króla <span class="dynamic-date" data-key="christ-king"></span></strong>: Odmówienie aktu oddania rodzaju ludzkiego.</li>
+				<li data-id="dec31"><strong>31 grudnia</strong>: Publiczne odśpiewanie hymnu <em>Ciebie Boga wysławiamy (Te Deum)</em>.</li>
+			</ul>
+		</section>
+	</div>
+
+	<script>
+		function getEaster(year) {
+			const f = Math.floor,
+				G = year % 19,
+				C = f(year / 100),
+				H = (C - f(C / 4) - f((8 * C + 13)/25) + 19 * G + 15) % 30,
+				I = H - f(H/28) * (1 - f(29/(H + 1)) * f((21 - G)/11)),
+				J = (year + f(year / 4) + I + 2 - C + f(C / 4)) % 7,
+				L = I - J,
+				month = 3 + f((L + 40)/44),
+				day = L + 28 - 31 * f(month / 4);
+			return new Date(year, month - 1, day);
+		}
+
+		function getChristTheKing(year) {
+			const christmas = new Date(year, 11, 25);
+			let dayOfWeek = christmas.getDay(); 
+			const fourthAdvent = new Date(christmas);
+			fourthAdvent.setDate(christmas.getDate() - (dayOfWeek === 0 ? 7 : dayOfWeek));
+			const christTheKing = new Date(fourthAdvent);
+			christTheKing.setDate(fourthAdvent.getDate() - 28);
+			return christTheKing;
+		}
+
+		function checkSpecials() {
+			const today = new Date();
+			const year = today.getFullYear();
+			const m = today.getMonth(); // 0-indexed
+			const d = today.getDate();
+			const dayOfWeek = today.getDay(); // 0 = Sunday, 5 = Friday
+
+			const easter = getEaster(year);
+			const ashWed = new Date(easter);
+			ashWed.setDate(easter.getDate() - 46);
+			const holyThursday = new Date(easter);
+			holyThursday.setDate(easter.getDate() - 3);
+			const goodFriday = new Date(easter);
+			goodFriday.setDate(easter.getDate() - 2);
+			const easterVigil = new Date(easter);
+			easterVigil.setDate(easter.getDate() - 1);
+			const pentecost = new Date(easter);
+			pentecost.setDate(easter.getDate() + 49);
+			const corpusChristi = new Date(easter);
+			corpusChristi.setDate(easter.getDate() + 60);
+			const sacredHeart = new Date(easter);
+			sacredHeart.setDate(easter.getDate() + 68);
+			const christTheKing = getChristTheKing(year);
+
+			const isSameDay = (d1, d2) => d1.getDate() === d2.getDate() && d1.getMonth() === d2.getMonth() && d1.getFullYear() === d2.getFullYear();
+			
+			const isLent = today >= ashWed && today < holyThursday;
+			
+			const specials = [];
+
+			if (m === 0 && d === 1) specials.push({ id: 'jan1', text: "1 stycznia: Publiczne odmówienie hymnu Veni Creator" });
+			if (m === 11 && d === 31) specials.push({ id: 'dec31', text: "31 grudnia: Publiczne odśpiewanie Ciebie Boga wysławiamy (Te Deum)" });
+			if (m === 5 && d === 29) specials.push({ id: 'peter-paul', text: "29 czerwca (Św. Piotra i Pawła): Użycie poświęconego przedmiotu i odmówienie Wyznania Wiary" });
+			if (m === 7 && d === 2) specials.push({ id: 'portiuncula', text: "2 sierpnia (Porcjunkuli): Nawiedzenie kościoła i odmówienie Ojcze nasz i Wierzę w Boga" });
+			if (m === 10 && d >= 1 && d <= 8) specials.push({ id: 'nov1to8', text: "1-8 listopada: Nawiedzenie cmentarza i modlitwa za zmarłych (za dusze w czyśćcu)" });
+			if (m === 10 && d === 2) specials.push({ id: 'nov2', text: "2 listopada (Zaduszki): Nawiedzenie kościoła/kaplicy i modlitwa za zmarłych" });
+
+			if (isLent && dayOfWeek === 5) specials.push({ id: 'lent-friday', text: "Piątek Wielkiego Postu: Odmówienie modlitwy 'Oto ja' po Komunii przed krzyżem" });
+			if (isLent) specials.push({ id: 'lent-weekly', text: "Wielki Post: Udział w Gorzkich Żalach raz w tygodniu" });
+
+			if (isSameDay(today, holyThursday)) specials.push({ id: 'holy-thursday', text: "Wielki Czwartek: Odmówienie Przed tak wielkim Sakramentem" });
+			if (isSameDay(today, goodFriday)) specials.push({ id: 'good-friday', text: "Wielki Piątek: Ucałowanie i Adoracja Krzyża" });
+			if (isSameDay(today, easterVigil)) specials.push({ id: 'easter-vigil', text: "Wigilia Paschalna: Odnowienie przyrzeczeń chrzcielnych" });
+			if (isSameDay(today, pentecost)) specials.push({ id: 'pentecost', text: "Zesłanie Ducha Świętego: Publiczne odmówienie Veni Creator" });
+			if (isSameDay(today, corpusChristi)) specials.push({ id: 'corpus-christi', text: "Boże Ciało: Udział w procesji eucharystycznej" });
+			if (isSameDay(today, sacredHeart)) specials.push({ id: 'sacred-heart', text: "Najświętszego Serca Pana Jezusa: Odmówienie 'O Jezu Najsłodszy'" });
+			if (isSameDay(today, christTheKing)) specials.push({ id: 'christ-king', text: "Chrystusa Króla: Akt oddania rodzaju ludzkiego" });
+
+			if (specials.length > 0) {
+				const specialSection = document.getElementById('today-special');
+				const specialList = document.getElementById('today-list');
+				specialSection.style.display = 'block';
+				
+				specials.forEach(s => {
+					const li = document.createElement('li');
+					li.textContent = s.text;
+					specialList.appendChild(li);
+
+					// highlight in calendar
+					const calItem = document.querySelector(`li[data-id="${s.id}"]`);
+					if (calItem) calItem.classList.add('active-today');
+				});
+			}
+			
+			// Format and display dynamic dates
+			const formatDate = (date) => date.toLocaleDateString('pl-PL', { month: 'long', day: 'numeric' });
+			const updateDate = (key, text) => {
+				const el = document.querySelector(`[data-key="${key}"]`);
+				if (el) el.textContent = `(${text})`;
+			};
+			
+			updateDate('lent', `${formatDate(ashWed)} - ${formatDate(holyThursday)}`);
+			updateDate('lent-weekly', `${formatDate(ashWed)} - ${formatDate(holyThursday)}`);
+			updateDate('holy-thursday', formatDate(holyThursday));
+			updateDate('good-friday', formatDate(goodFriday));
+			updateDate('easter-vigil', formatDate(easterVigil));
+			updateDate('pentecost', formatDate(pentecost));
+			updateDate('corpus-christi', formatDate(corpusChristi));
+			updateDate('sacred-heart', formatDate(sacredHeart));
+			updateDate('christ-king', formatDate(christTheKing));
+		}
+		
+		document.addEventListener('DOMContentLoaded', checkSpecials);
+	</script>
+
+	<style>
+		.indulgences-container {
+			max-width: 800px;
+			margin: 0 auto;
+		}
+		.intro {
+			font-size: 1.2rem;
+			margin-bottom: 2rem;
+		}
+		.highlight-section {
+			background-color: var(--accent);
+			color: var(--bg);
+			padding: 1.5rem;
+			margin-bottom: 2rem;
+			box-shadow: 4px 4px 0 var(--text);
+			animation: glow 2s infinite alternate;
+		}
+		.highlight-section h2 {
+			color: var(--bg);
+			margin-top: 0;
+		}
+		.columns {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 2rem;
+			margin-bottom: 2rem;
+		}
+		@media (max-width: 600px) {
+			.columns { grid-template-columns: 1fr; }
+		}
+		.col {
+			background-color: rgba(0,0,0,0.02);
+			padding: 1.5rem;
+			border: 2px solid var(--text);
+			box-shadow: 4px 4px 0 var(--text);
+		}
+		:root[data-theme="dark"] .col {
+			background-color: rgba(255,255,255,0.02);
+		}
+		.conditions {
+			font-size: 0.9rem;
+			opacity: 0.8;
+			margin-top: 1rem;
+			border-top: 1px dashed var(--text);
+			padding-top: 1rem;
+		}
+		ul {
+			list-style-type: square;
+			padding-left: 1.2rem;
+		}
+		li {
+			margin-bottom: 0.8rem;
+		}
+		.calendar {
+			border: 2px solid var(--text);
+			padding: 1.5rem;
+			box-shadow: 4px 4px 0 var(--text);
+		}
+		.active-today {
+			font-weight: bold;
+			color: var(--bg);
+			background-color: var(--link);
+			padding: 0.2rem 0.5rem;
+			border-left: 4px solid var(--accent);
+			margin-left: -0.7rem;
+			border-radius: 2px;
+		}
+		@keyframes glow {
+			from { box-shadow: 4px 4px 0 var(--text); }
+			to { box-shadow: 4px 4px 15px var(--title); }
+		}
+	</style>
+</Layout>
